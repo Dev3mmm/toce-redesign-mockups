@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas — Times of Crypto Era Redesign</title>
+</head>
+<body>
+<style>
+  :root {
+    --ink:#14181c; --paper:#ffffff; --surface:#f5f6f7; --line:#e6e8ea; --muted:#6b7178;
+    --accent:#0f766e; --accent-soft:#e3f3f1; --gain:#1a9c6b; --loss:#d9422f;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:'Public Sans',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; text-decoration:none; }
+  .display { font-family:'Fraunces',Georgia,serif; text-wrap:balance; }
+  .mono { font-family:'IBM Plex Mono',ui-monospace,monospace; font-variant-numeric:tabular-nums; }
+  .wrap { max-width:1240px; margin:0 auto; padding:0 32px; }
+
+  header.site { border-bottom:1px solid var(--line); padding:20px 0; }
+  .header-row { display:flex; align-items:center; justify-content:space-between; }
+  .wordmark { font-family:'Fraunces',serif; font-weight:600; font-size:21px; }
+  .wordmark span { color:var(--accent); }
+  nav.primary { display:flex; gap:26px; font-size:14px; font-weight:500; color:var(--muted); }
+  nav.primary a:hover { color:var(--ink); }
+  .btn { background:var(--ink); color:#fff; padding:9px 18px; border-radius:8px; font-size:13px; font-weight:700; }
+
+  /* Heatmap — the anchor module */
+  .heatmap-section { padding:32px 0 10px; }
+  .heatmap-head { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:16px; }
+  .heatmap-title { font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); }
+  .heatmap-legend { display:flex; align-items:center; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); }
+  .legend-bar { width:80px; height:8px; border-radius:4px; background:linear-gradient(90deg,var(--loss),#f2ede1,var(--gain)); }
+
+  .heatmap-grid { display:grid; grid-template-columns:repeat(8,1fr); grid-auto-rows:64px; gap:3px; margin-bottom:36px; }
+  .tile { border-radius:5px; display:flex; flex-direction:column; justify-content:center; align-items:center; color:#fff; font-weight:700; }
+  .tile .sym { font-size:13px; } .tile .chg { font-family:'IBM Plex Mono',monospace; font-size:10.5px; font-weight:500; opacity:0.9; }
+  .tile.big { grid-column:span 2; grid-row:span 2; }
+  .tile.med { grid-column:span 2; }
+
+  .hero { display:grid; grid-template-columns:1.6fr 1fr; gap:40px; padding:20px 0 0; }
+  .kicker { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:14px; }
+  .hero-media { height:280px; border-radius:12px; background:linear-gradient(135deg,var(--accent),#5eead4); margin-bottom:16px; }
+  .hero h1 { font-size:32px; line-height:1.1; font-weight:600; margin:0 0 12px; }
+  .hero .dek { font-size:15px; line-height:1.6; color:var(--muted); max-width:56ch; margin:0 0 14px; }
+  .byline { font-size:12.5px; color:var(--muted); }
+
+  .glossary-card { background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:20px; margin-bottom:16px; }
+  .glossary-label { font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--accent); margin-bottom:10px; }
+  .glossary-term { font-family:'Fraunces',serif; font-size:20px; font-weight:600; margin-bottom:6px; }
+  .glossary-def { font-size:12.5px; color:var(--muted); line-height:1.55; }
+
+  .rail-title { font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); margin-bottom:12px; border-bottom:1px solid var(--line); padding-bottom:10px; }
+  .trend-row { display:flex; justify-content:space-between; gap:10px; padding:11px 0; border-bottom:1px solid var(--line); font-size:13.5px; }
+  .trend-row .cat { color:var(--accent); font-weight:700; font-size:10.5px; text-transform:uppercase; display:block; margin-bottom:3px; }
+
+  .section-head { display:flex; justify-content:space-between; align-items:baseline; padding:44px 0 18px; }
+  .section-title { font-size:20px; font-weight:600; font-family:'Fraunces',serif; }
+  .view-all { font-size:13px; color:var(--accent); font-weight:600; }
+
+  .grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; padding-bottom:56px; }
+  .story-card .thumb { height:130px; border-radius:10px; background:var(--surface); border:1px solid var(--line); margin-bottom:12px; }
+  .story-card .cat { font-size:10px; font-weight:700; text-transform:uppercase; color:var(--accent); margin-bottom:6px; }
+  .story-card h3 { font-size:15px; font-weight:700; line-height:1.3; margin:0 0 6px; }
+  .story-card p { font-size:12.5px; color:var(--muted); line-height:1.5; margin:0; }
+
+  footer.site { border-top:1px solid var(--line); padding:24px 0; display:flex; justify-content:space-between; font-size:12px; color:var(--muted); }
+
+  @media (max-width:960px) { .hero { grid-template-columns:1fr; } .heatmap-grid { grid-template-columns:repeat(4,1fr); } .grid-4 { grid-template-columns:repeat(2,1fr); } }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<header class="site">
+  <div class="wrap header-row">
+    <div class="wordmark">Times of Crypto <span>Era</span></div>
+    <nav class="primary"><a href="#">Latest</a><a href="#">Bitcoin</a><a href="#">Ethereum</a><a href="#">Solana</a><a href="#">Markets</a></nav>
+    <a class="btn" href="#">Subscribe</a>
+  </div>
+</header>
+
+<div class="wrap heatmap-section">
+  <div class="heatmap-head">
+    <span class="heatmap-title">Market Heatmap · Top 24 by Cap</span>
+    <div class="heatmap-legend"><span>-5%</span><span class="legend-bar"></span><span>+5%</span></div>
+  </div>
+  <div class="heatmap-grid">
+    <div class="tile big" style="background:#1a9c6b;"><span class="sym">BTC</span><span class="chg">+2.14%</span></div>
+    <div class="tile med" style="background:#c94f3d;"><span class="sym">ETH</span><span class="chg">-0.86%</span></div>
+    <div class="tile" style="background:#1fae77;"><span class="sym">SOL</span><span class="chg">+4.32%</span></div>
+    <div class="tile" style="background:#2a8f66;"><span class="sym">BNB</span><span class="chg">+1.05%</span></div>
+    <div class="tile" style="background:#c94f3d;"><span class="sym">XRP</span><span class="chg">-1.42%</span></div>
+    <div class="tile" style="background:#39b884;"><span class="sym">DOGE</span><span class="chg">+6.71%</span></div>
+    <div class="tile" style="background:#8a8f78;"><span class="sym">ADA</span><span class="chg">+0.12%</span></div>
+    <div class="tile" style="background:#d9422f;"><span class="sym">ARB</span><span class="chg">-2.05%</span></div>
+    <div class="tile" style="background:#2a8f66;"><span class="sym">AVAX</span><span class="chg">+1.88%</span></div>
+    <div class="tile" style="background:#8a8f78;"><span class="sym">OP</span><span class="chg">-0.34%</span></div>
+    <div class="tile" style="background:#1fae77;"><span class="sym">LINK</span><span class="chg">+3.02%</span></div>
+    <div class="tile" style="background:#c94f3d;"><span class="sym">DOT</span><span class="chg">-1.11%</span></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="hero">
+    <div>
+      <div class="kicker">Solana · Lead Story</div>
+      <div class="hero-media"></div>
+      <h1 class="display">Why Solana Has Had Network Outages, and What&rsquo;s Changed</h1>
+      <p class="dek">Solana went fully offline multiple times in its early years. Here is what actually caused those outages and the fixes that followed.</p>
+      <div class="byline">Martin · Aug 26, 2026 · 6 min read</div>
+    </div>
+    <div>
+      <div class="glossary-card">
+        <div class="glossary-label">Term of the Day</div>
+        <div class="glossary-term">Proof of History</div>
+        <div class="glossary-def">A cryptographic clock Solana uses to timestamp transactions before consensus, cutting how much validators need to communicate to agree on order.</div>
+      </div>
+      <div class="rail-title">Trending Now</div>
+      <div class="trend-row"><div><span class="cat">Ethereum</span>What Layer-2 Rollups Actually Do for Ethereum</div></div>
+      <div class="trend-row"><div><span class="cat">Ethereum</span>What the Ethereum Merge Actually Changed</div></div>
+      <div class="trend-row"><div><span class="cat">Regulation</span>How Stablecoins Actually Keep Their Peg</div></div>
+    </div>
+  </div>
+
+  <div class="section-head"><div class="section-title">Latest News</div><a class="view-all" href="#">View all →</a></div>
+  <div class="grid-4">
+    <div class="story-card"><div class="thumb"></div><span class="cat">Bitcoin</span><h3>What Is Bitcoin Halving, and Why It Matters</h3><p>The scheduled cut to new BTC issuance, explained.</p></div>
+    <div class="story-card"><div class="thumb"></div><span class="cat">DeFi</span><h3>What Is DeFi? A Plain Explanation</h3><p>Lending, trading, and yield without a bank.</p></div>
+    <div class="story-card"><div class="thumb"></div><span class="cat">Solana</span><h3>How Solana Achieves High Throughput</h3><p>Proof of History and parallel execution.</p></div>
+    <div class="story-card"><div class="thumb"></div><span class="cat">Ethereum</span><h3>What Layer-2 Rollups Actually Do</h3><p>The settlement mechanism, explained.</p></div>
+  </div>
+</div>
+
+<footer class="site"><div class="wrap" style="display:flex; justify-content:space-between; width:100%;"><span>© 2026 Times of Crypto Era</span><span>ATLAS</span></div></footer>
+</body>
+</html>
