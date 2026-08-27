@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Broadsheet — Times of Crypto Era Redesign</title>
+</head>
+<body>
+<style>
+  :root {
+    --paper: #f7f5ef;
+    --paper-2: #efece3;
+    --ink: #1a1d22;
+    --rule: #d8d3c4;
+    --muted: #6b6f64;
+    --accent: #1e4fd6;
+    --stamp: #b0271e;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Archivo', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .display {
+    font-family: 'Newsreader', Georgia, serif;
+    text-wrap: balance;
+  }
+
+  .mono {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+
+  .dateline {
+    border-bottom: 1px solid var(--ink);
+    padding: 8px 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+  }
+
+  header.masthead {
+    padding: 30px 0 18px;
+    border-bottom: 3px solid var(--ink);
+  }
+  .masthead-row { display: flex; align-items: flex-end; justify-content: space-between; }
+  .wordmark {
+    font-family: 'Newsreader', serif;
+    font-size: 52px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+  .wordmark em { font-style: italic; color: var(--stamp); }
+  .btn {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 0;
+  }
+
+  nav.subnav {
+    border-bottom: 1px solid var(--ink);
+    padding: 12px 0;
+    display: flex;
+    gap: 26px;
+    font-size: 13.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  nav.subnav a:hover { color: var(--accent); }
+
+  /* Hero + most read */
+  .hero {
+    display: grid;
+    grid-template-columns: 1.7fr 1px 1fr;
+    gap: 40px;
+    padding: 44px 0 50px;
+  }
+  .rule-v { background: var(--rule); }
+
+  .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--stamp);
+    margin-bottom: 12px;
+  }
+  .hero-headline {
+    font-size: 46px;
+    line-height: 1.05;
+    font-weight: 600;
+    margin: 0 0 18px;
+  }
+  .hero-dek {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.5;
+    color: #33362f;
+    max-width: 52ch;
+    margin: 0 0 20px;
+  }
+  .byline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    color: var(--muted);
+    border-top: 1px solid var(--rule);
+    padding-top: 12px;
+  }
+
+  .rail-title {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 20px;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 10px;
+    margin-bottom: 4px;
+  }
+  .most-read-row {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .most-read-row .num {
+    font-family: 'Newsreader', serif;
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--rule);
+    line-height: 1;
+  }
+  .most-read-row .cat {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .most-read-row .title { font-size: 15px; font-weight: 600; line-height: 1.34; }
+
+  /* Latest — asymmetric newspaper grid */
+  .section-band {
+    border-top: 3px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 10px 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  .latest-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+    padding: 40px 0 70px;
+  }
+  .story {
+    padding: 0 24px 28px;
+    border-right: 1px solid var(--rule);
+  }
+  .story:last-child { border-right: none; }
+  .story.span-3 { grid-column: span 3; }
+  .story.span-2 { grid-column: span 2; }
+  .story .cat {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .story h3 {
+    font-family: 'Newsreader', serif;
+    font-weight: 600;
+    margin: 0 0 10px;
+    line-height: 1.2;
+  }
+  .story.span-3 h3 { font-size: 27px; }
+  .story.span-2 h3 { font-size: 21px; }
+  .story p { color: var(--muted); font-size: 14px; line-height: 1.55; margin: 0 0 10px; }
+  .story .byline { border-top: none; padding-top: 0; }
+
+  footer.site {
+    border-top: 3px solid var(--ink);
+    padding: 30px 0;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 24px;
+    font-size: 13px;
+  }
+  footer.site .col-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  footer.site a { display: block; margin-bottom: 8px; }
+  footer.site a:hover { color: var(--accent); }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .rule-v { display: none; }
+    .latest-grid { grid-template-columns: 1fr; }
+    .story { grid-column: span 1 !important; border-right: none; border-bottom: 1px solid var(--rule); padding-bottom: 24px; margin-bottom: 24px; }
+    footer.site { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,500;0,600;1,500&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<div class="wrap">
+  <div class="dateline">
+    <span>Thursday, August 27, 2026 · Digital Edition</span>
+    <span>No. 214</span>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap masthead-row">
+    <div class="wordmark">Times of Crypto <em>Era</em></div>
+    <a class="btn" href="#">Subscribe</a>
+  </div>
+</header>
+
+<nav class="subnav">
+  <div class="wrap" style="display:flex; gap:26px;">
+    <a href="#">Latest</a>
+    <a href="#">Bitcoin</a>
+    <a href="#">Ethereum</a>
+    <a href="#">Solana</a>
+    <a href="#">Contact</a>
+    <a href="#">Search</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="hero">
+    <div>
+      <div class="kicker">Lead Story — Solana</div>
+      <h1 class="hero-headline display">Why Solana Has Had Network Outages, and What&rsquo;s Changed</h1>
+      <p class="hero-dek">Solana went fully offline multiple times in its early years. Here is what actually caused those outages and the fixes that followed.</p>
+      <div class="byline mono">By Martin · Aug 26, 2026</div>
+    </div>
+    <div class="rule-v"></div>
+    <div>
+      <div class="rail-title">Most Read</div>
+      <div class="most-read-row">
+        <span class="num">1</span>
+        <div>
+          <span class="cat">Solana</span>
+          <div class="title">How Solana Achieves High Throughput Where Other Chains Struggle</div>
+        </div>
+      </div>
+      <div class="most-read-row">
+        <span class="num">2</span>
+        <div>
+          <span class="cat">Ethereum</span>
+          <div class="title">What Layer-2 Rollups Actually Do for Ethereum</div>
+        </div>
+      </div>
+      <div class="most-read-row">
+        <span class="num">3</span>
+        <div>
+          <span class="cat">Ethereum</span>
+          <div class="title">What the Ethereum Merge Actually Changed</div>
+        </div>
+      </div>
+      <div class="most-read-row">
+        <span class="num">4</span>
+        <div>
+          <span class="cat">Regulation</span>
+          <div class="title">How Stablecoins Actually Keep Their Peg</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="section-band"><span>Latest News</span><span>View All →</span></div>
+</div>
+
+<div class="wrap latest-grid">
+  <div class="story span-3">
+    <span class="cat">Bitcoin</span>
+    <h3 class="display">What Is Bitcoin Halving, and Why It Matters for Supply</h3>
+    <p>The scheduled cut to new BTC issuance, explained without the hype — what actually changes on-chain, and what doesn&rsquo;t.</p>
+    <div class="byline mono">Martin · Aug 26</div>
+  </div>
+  <div class="story span-3">
+    <span class="cat">DeFi</span>
+    <h3 class="display">What Is DeFi? A Plain Explanation of Decentralized Finance</h3>
+    <p>Lending, trading, and yield without a bank in the middle — the mechanics, in plain terms.</p>
+    <div class="byline mono">Martin · Aug 26</div>
+  </div>
+  <div class="story span-2">
+    <span class="cat">Regulation</span>
+    <h3 class="display">How Stablecoins Actually Keep Their Peg</h3>
+    <p>Reserves, redemption, and the mechanisms that hold a dollar-pegged token to a dollar.</p>
+  </div>
+  <div class="story span-2">
+    <span class="cat">Ethereum</span>
+    <h3 class="display">What the Ethereum Merge Actually Changed</h3>
+    <p>Proof of stake, issuance, and what shifted under the hood versus what stayed the same.</p>
+  </div>
+  <div class="story span-2">
+    <span class="cat">Ethereum</span>
+    <h3 class="display">What Layer-2 Rollups Actually Do for Ethereum</h3>
+    <p>Rollups bundle transactions off-chain and settle back to Ethereum — here is the actual mechanism.</p>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="wrap" style="grid-column:1/-1; display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:24px;">
+    <div>
+      <div class="wordmark" style="font-size:22px;">Times of Crypto Era</div>
+      <p style="color:var(--muted); max-width:32ch; margin-top:10px;">Bitcoin, DeFi, and market coverage you can verify.</p>
+    </div>
+    <div>
+      <div class="col-title">Sections</div>
+      <a href="#">Bitcoin</a><a href="#">Ethereum</a><a href="#">Solana</a>
+    </div>
+    <div>
+      <div class="col-title">About</div>
+      <a href="#">Contact</a><a href="#">Editorial Standards</a>
+    </div>
+    <div>
+      <div class="col-title">Design Direction</div>
+      <span class="mono">BROADSHEET</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
