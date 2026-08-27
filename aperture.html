@@ -139,6 +139,25 @@
     .card-row { grid-template-columns: 1fr; }
     .glass-card:nth-child(2) { margin-top: 0; }
   }
+
+  .cat-section { padding: 30px 0 6px; }
+  .cat-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 16px; }
+  .cat-head h2 { font-size: 18px; font-weight: 700; margin: 0; }
+  .cat-head a { font-size: 12.5px; font-weight: 600; color: var(--blue); text-decoration: none; }
+  .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 30px; }
+  .cat-card { border: 1px solid var(--glass-border); border-radius: 10px; padding: 14px 16px; background: var(--glass); }
+  .cat-card h3 { font-size: 14px; font-weight: 700; margin: 0 0 6px; line-height: 1.32; color: var(--ink); }
+  .cat-card p { font-size: 12px; color: var(--muted); margin: 0; line-height: 1.5; }
+  .sponsored-section { padding: 6px 0 40px; }
+  .sponsored-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 16px; }
+  .sponsored-head h2 { font-size: 15px; font-weight: 700; margin: 0; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .sponsored-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); border: 1px solid var(--glass-border); padding: 3px 8px; border-radius: 999px; }
+  .sponsored-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .sponsored-card { border: 1px dashed var(--glass-border); border-radius: 10px; padding: 16px 18px; }
+  .sponsored-card .badge { display: inline-block; font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); border: 1px solid var(--glass-border); padding: 3px 8px; border-radius: 999px; margin-bottom: 8px; }
+  .sponsored-card h3 { font-size: 14.5px; font-weight: 700; margin: 0 0 6px; color: var(--ink); }
+  .sponsored-card p { font-size: 12px; color: var(--muted); margin: 0; }
+  @media (max-width: 900px) { .cat-grid { grid-template-columns: 1fr; } .sponsored-grid { grid-template-columns: 1fr; } }
 </style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -217,6 +236,52 @@
   </div>
 </div>
 
+
+<div class="wrap">
+  <div class="cat-section">
+    <div class="cat-head"><h2>Bitcoin</h2><a href="#">All Bitcoin coverage →</a></div>
+    <div class="cat-grid">
+      <div class="cat-card"><h3>What Is Bitcoin Halving, and Why It Matters for Supply</h3><p>The scheduled cut to new BTC issuance, explained without the hype.</p></div>
+      <div class="cat-card"><h3>How Bitcoin's Difficulty Adjustment Actually Works</h3><p>Why block times stay near ten minutes no matter how much hash power joins.</p></div>
+      <div class="cat-card"><h3>What Actually Backs Bitcoin's Store-of-Value Narrative</h3><p>Scarcity, issuance schedule, and the case skeptics make against it.</p></div>
+    </div>
+  </div>
+
+  <div class="cat-section">
+    <div class="cat-head"><h2>Solana</h2><a href="#">All Solana coverage →</a></div>
+    <div class="cat-grid">
+      <div class="cat-card"><h3>Why Solana Has Had Network Outages, and What's Changed</h3><p>The outages, and the fixes that followed.</p></div>
+      <div class="cat-card"><h3>How Solana Achieves High Throughput Where Other Chains Struggle</h3><p>Proof of History and parallel execution, explained.</p></div>
+      <div class="cat-card"><h3>What Firedancer Actually Changes for Solana Validators</h3><p>A second client aimed at the network's reliability problem.</p></div>
+    </div>
+  </div>
+
+  <div class="cat-section">
+    <div class="cat-head"><h2>Cardano</h2><a href="#">All Cardano coverage →</a></div>
+    <div class="cat-grid">
+      <div class="cat-card"><h3>What Is Cardano's Proof-of-Stake Design, Explained</h3><p>Ouroboros and the research-first approach to consensus.</p></div>
+      <div class="cat-card"><h3>How Cardano's Peer-Reviewed Development Process Works</h3><p>Why every major upgrade goes through academic review first.</p></div>
+      <div class="cat-card"><h3>Why Cardano's Smart Contracts Took Years Longer Than Rivals</h3><p>The tradeoffs behind a slower, formally-verified rollout.</p></div>
+    </div>
+  </div>
+
+  <div class="cat-section">
+    <div class="cat-head"><h2>Ethereum</h2><a href="#">All Ethereum coverage →</a></div>
+    <div class="cat-grid">
+      <div class="cat-card"><h3>What the Ethereum Merge Actually Changed</h3><p>Proof of stake, issuance, and what shifted under the hood.</p></div>
+      <div class="cat-card"><h3>What Layer-2 Rollups Actually Do for Ethereum</h3><p>Rollups bundle transactions off-chain and settle back on Ethereum.</p></div>
+      <div class="cat-card"><h3>How Ethereum's Gas Fees Are Actually Calculated</h3><p>Base fee, priority tips, and why costs spike under load.</p></div>
+    </div>
+  </div>
+
+  <div class="sponsored-section">
+    <div class="sponsored-head"><h2>Press Releases &amp; Sponsored</h2><span class="sponsored-tag">Disclosure</span></div>
+    <div class="sponsored-grid">
+      <div class="sponsored-card"><span class="badge">Sponsored</span><h3>Sponsored: Atlas Protocol Launches Cross-Chain Liquidity Bridge</h3><p>A new bridge connecting five major L1s goes live this week.</p></div>
+      <div class="sponsored-card"><span class="badge">Sponsored</span><h3>Press Release: Helix Foundation Opens $10M Ecosystem Grants Program</h3><p>Applications open for builders shipping on the Helix network.</p></div>
+    </div>
+  </div>
+</div>
 <footer class="site">
   <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
     <span>© 2026 Times of Crypto Era</span>

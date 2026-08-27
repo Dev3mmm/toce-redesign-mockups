@@ -122,6 +122,19 @@
     .well { padding: 34px 24px 70px; }
     .medium-block { grid-template-columns: 1fr; }
   }
+
+  .cat-section { padding: 26px 0 0; border-top: 1px solid var(--rule); margin-top: 10px; }
+  .cat-section .kicker { margin-bottom: 10px; }
+  .cat-item { display: grid; grid-template-columns: 90px 1fr; gap: 16px; padding: 14px 0; border-top: 1px solid var(--rule); }
+  .cat-item:first-of-type { border-top: none; }
+  .cat-item h4 { font-family: 'Zilla Slab', serif; font-weight: 600; font-size: 15px; margin: 0 0 4px; }
+  .cat-item p { font-size: 12.5px; color: var(--muted); margin: 0; }
+  .sponsored-section { padding: 26px 0 0; border-top: 2px solid var(--ink); margin-top: 20px; }
+  .sponsored-section .kicker { color: var(--muted); }
+  .sponsored-item { border: 1px dashed var(--rule); border-radius: 4px; padding: 14px 16px; margin-top: 12px; }
+  .sponsored-item .badge { display: inline-block; font-family: 'Spline Sans Mono', monospace; font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); border: 1px solid var(--rule); padding: 3px 8px; border-radius: 999px; margin-bottom: 8px; }
+  .sponsored-item h4 { font-family: 'Zilla Slab', serif; font-weight: 600; font-size: 14.5px; margin: 0 0 5px; }
+  .sponsored-item p { font-size: 12px; color: var(--muted); margin: 0; }
 </style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -208,6 +221,36 @@
         <h3 class="display">How Stablecoins Actually Keep Their Peg</h3>
         <p>Reserves, redemption, and the mechanisms that hold a dollar-pegged token to a dollar.</p>
       </div>
+    </div>
+
+    
+    <div class="cat-section">
+      <div class="kicker">Bitcoin</div>
+      <div class="cat-item"><span class="cat" style="grid-column:1;"></span><div><h4 class="display">What Is Bitcoin Halving, and Why It Matters for Supply</h4><p>The scheduled cut to new BTC issuance, explained without the hype.</p></div></div>
+      <div class="cat-item"><span class="cat" style="grid-column:1;"></span><div><h4 class="display">How Bitcoin's Difficulty Adjustment Actually Works</h4><p>Why block times stay near ten minutes no matter how much hash power joins.</p></div></div>
+    </div>
+
+    <div class="cat-section">
+      <div class="kicker">Solana</div>
+      <div class="cat-item"><span class="cat" style="grid-column:1;"></span><div><h4 class="display">How Solana Achieves High Throughput Where Other Chains Struggle</h4><p>Proof of History and parallel execution, explained.</p></div></div>
+      <div class="cat-item"><span class="cat" style="grid-column:1;"></span><div><h4 class="display">What Firedancer Actually Changes for Solana Validators</h4><p>A second client aimed at the network's reliability problem.</p></div></div>
+    </div>
+
+    <div class="cat-section">
+      <div class="kicker">Cardano</div>
+      <div class="cat-item"><span class="cat" style="grid-column:1;"></span><div><h4 class="display">What Is Cardano's Proof-of-Stake Design, Explained</h4><p>Ouroboros and the research-first approach to consensus.</p></div></div>
+      <div class="cat-item"><span class="cat" style="grid-column:1;"></span><div><h4 class="display">Why Cardano's Smart Contracts Took Years Longer Than Rivals</h4><p>The tradeoffs behind a slower, formally-verified rollout.</p></div></div>
+    </div>
+
+    <div class="cat-section">
+      <div class="kicker">Ethereum</div>
+      <div class="cat-item"><span class="cat" style="grid-column:1;"></span><div><h4 class="display">How Ethereum's Gas Fees Are Actually Calculated</h4><p>Base fee, priority tips, and why costs spike under load.</p></div></div>
+    </div>
+
+    <div class="sponsored-section">
+      <div class="kicker">Press Releases &amp; Sponsored</div>
+      <div class="sponsored-item"><span class="badge">Sponsored</span><h4 class="display">Atlas Protocol Launches Cross-Chain Liquidity Bridge</h4><p>A new bridge connecting five major L1s goes live this week.</p></div>
+      <div class="sponsored-item"><span class="badge">Press Release</span><h4 class="display">Helix Foundation Opens $10M Ecosystem Grants Program</h4><p>Applications open for builders shipping on the Helix network.</p></div>
     </div>
 
     <hr class="rule">
