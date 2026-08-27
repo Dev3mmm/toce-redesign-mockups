@@ -1,0 +1,27 @@
+[
+  {
+    "slug": "meridian",
+    "name": "Meridian",
+    "desc": "Financial-authority. Navy ink on warm paper, deep gold accent, slab-serif headlines. Bloomberg/WSJ-adjacent gravitas for a crypto desk."
+  },
+  {
+    "slug": "volt",
+    "name": "Volt",
+    "desc": "Consumer fintech energy. Pure white, near-black text, one confident electric-blue accent, rounded friendly pills. Coinbase/Robinhood-adjacent."
+  },
+  {
+    "slug": "obsidian",
+    "name": "Obsidian",
+    "desc": "Premium dark-mode minimalism. Near-black ground, crisp white type, single muted emerald accent, no chrome. The Block-adjacent pro feel."
+  },
+  {
+    "slug": "ember",
+    "name": "Ember",
+    "desc": "Warm editorial authority. Cream paper, deep burnt-orange masthead, classic serif headlines. CoinDesk-adjacent established-outlet feel."
+  },
+  {
+    "slug": "pulse",
+    "name": "Pulse",
+    "desc": "Bold crypto-native energy. Deep violet-black ground, vivid magenta-violet accent, condensed display type. Decrypt-adjacent youthful punch."
+  }
+]
