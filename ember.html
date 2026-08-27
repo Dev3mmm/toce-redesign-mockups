@@ -8,227 +8,155 @@
 <body>
 <style>
   :root {
-    --ink: #241a12;
-    --paper: #fbf3e7;
-    --surface: #f5e9d6;
-    --surface-2: #efe0c6;
-    --line: #e3d2b0;
-    --muted: #7a6a54;
-    --accent: #c1541c;
-    --accent-soft: #f6ddc9;
-    --breaking: #b0271e;
-    --up: #3f7d4a;
-    --down: #b0271e;
-    --radius: 6px;
-    --pill: 999px;
+    --ink:#241a12; --paper:#fbf3e7; --surface:#f5e9d6; --surface2:#efe0c6; --line:#e3d2b0;
+    --muted:#7a6a54; --accent:#c1541c; --accent-soft:#f6ddc9; --up:#3f7d4a; --down:#b0271e;
   }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:'Nunito Sans',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; text-decoration:none; }
+  .display { font-family:'Lora',Georgia,serif; text-wrap:balance; }
+  .mono { font-family:'JetBrains Mono',ui-monospace,monospace; font-variant-numeric:tabular-nums; }
+  .wrap { max-width:1180px; margin:0 auto; padding:0 32px; }
 
-  * { box-sizing: border-box; }
+  .dateline { border-bottom:1px solid var(--ink); padding:9px 0; display:flex; justify-content:space-between; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); }
 
-  body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'Nunito Sans', system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
+  header.site { padding:26px 0 16px; border-bottom:3px solid var(--ink); }
+  .header-row { display:flex; align-items:flex-end; justify-content:space-between; }
+  .wordmark { font-family:'Lora',serif; font-size:38px; font-weight:600; }
+  .wordmark em { font-style:italic; color:var(--accent); }
+  .btn { background:var(--ink); color:var(--paper); padding:10px 20px; font-size:13px; font-weight:700; }
 
-  a { color: inherit; text-decoration: none; }
-  .display { font-family: 'Lora', Georgia, serif; font-weight: 600; letter-spacing: 0em; text-wrap: balance; }
-  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+  nav.subnav { border-bottom:1px solid var(--ink); padding:11px 0; display:flex; gap:24px; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.02em; }
+  nav.subnav a:hover { color:var(--accent); }
 
-  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+  .hero { display:grid; grid-template-columns:1.6fr 1fr; gap:40px; padding:36px 0 0; }
+  .kicker { font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:12px; }
+  .hero-media { height:300px; background:linear-gradient(135deg,var(--accent),var(--surface2)); margin-bottom:18px; }
+  .hero h1 { font-size:38px; line-height:1.08; font-weight:600; margin:0 0 14px; }
+  .hero .dek { font-family:'Lora',serif; font-style:italic; font-size:17px; line-height:1.5; color:#4b3f2f; max-width:52ch; margin:0 0 16px; }
+  .byline { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); border-top:1px solid var(--line); padding-top:10px; }
 
-  .ticker-bar { background: #241a12; color: #e3d2b0; }
-  .ticker-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; font-size: 12px; }
-  .ticker-prices { display: flex; gap: 22px; }
-  .ticker-prices b { color: #fff; font-weight: 700; }
-  .up { color: var(--up); } .down { color: var(--down); }
+  /* Newsletter sidebar box */
+  .sidebar-card { background:var(--surface); border:1px solid var(--line); padding:20px; margin-bottom:16px; }
+  .sidebar-card h4 { font-family:'Lora',serif; font-size:18px; margin:0 0 8px; }
+  .sidebar-card p { font-size:12.5px; color:var(--muted); line-height:1.5; margin:0 0 14px; }
+  .sidebar-form { display:flex; flex-direction:column; gap:8px; }
+  .sidebar-form input { border:1px solid var(--line); background:var(--paper); padding:10px 12px; font-size:13px; }
+  .sidebar-form button { background:var(--accent); color:#fff; border:none; padding:10px; font-weight:700; font-size:13px; }
 
-  header.site { border-bottom: 1px solid var(--line); }
-  .header-row { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; }
-  .wordmark { font-family: 'Lora', Georgia, serif; font-weight: 600; font-size: 21px; letter-spacing: 0em; }
-  .wordmark span { color: var(--accent); }
-  nav.primary { display: flex; gap: 28px; font-size: 14.5px; font-weight: 500; }
-  nav.primary a:hover { color: var(--accent); }
-  .header-actions { display: flex; align-items: center; gap: 16px; }
-  .search-icon { width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 15px; }
-  .btn-primary { background: var(--accent); color: #fff; padding: 10px 18px; border-radius: var(--pill); font-size: 13.5px; font-weight: 700; }
+  .snap-row { display:flex; justify-content:space-between; padding:8px 0; border-top:1px solid var(--line); font-size:12.5px; }
+  .snap-row:first-of-type { border-top:none; }
+  .snap-row .px { font-family:'JetBrains Mono',monospace; font-weight:700; }
 
-  .subnav { border-bottom: 1px solid var(--line); padding: 12px 0; display: flex; align-items: center; gap: 22px; }
-  .subnav a { font-size: 13px; color: var(--muted); font-weight: 500; }
-  .subnav a:hover { color: var(--ink); }
-  .subnav .live { display: inline-flex; align-items: center; gap: 6px; color: var(--breaking); font-weight: 700; font-size: 12px; letter-spacing: 0.02em; margin-left: auto; }
-  .subnav .live::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--breaking); animation: blink 1.6s infinite; }
-  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
-  @media (prefers-reduced-motion: reduce) { .subnav .live::before { animation: none; } }
+  .band-title { font-family:'Lora',serif; font-style:italic; font-size:22px; border-bottom:2px solid var(--ink); padding-bottom:10px; margin:0 0 20px; display:flex; align-items:baseline; justify-content:space-between; }
+  .band-title span.tag { font-family:'JetBrains Mono',monospace; font-size:10.5px; font-style:normal; text-transform:uppercase; letter-spacing:0.06em; color:var(--accent); }
 
-  .hero { display: grid; grid-template-columns: 1.65fr 1fr; gap: 44px; padding: 40px 0 48px; }
-  .hero-media {
-    height: 360px; border-radius: var(--radius); margin-bottom: 20px; overflow: hidden;
-    background: linear-gradient(135deg, var(--accent), var(--surface-2) 130%);
-    position: relative;
-  }
-  .hero-media .cat-tag {
-    position: absolute; left: 18px; bottom: 18px;
-    background: rgba(0,0,0,0.55); color: #fff; backdrop-filter: blur(6px);
-    font-size: 11.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
-    padding: 6px 12px; border-radius: var(--pill);
-  }
-  .hero h1 { font-size: 38px; line-height: 1.1; margin: 0 0 14px; font-family: 'Lora', Georgia, serif; font-weight: 600; letter-spacing: 0em; }
-  .hero .dek { font-size: 16px; line-height: 1.6; color: var(--muted); max-width: 60ch; margin: 0 0 18px; }
-  .byline { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
-  .avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--surface-2); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--muted); }
+  .picks-row { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; padding:40px 0; }
+  .pick-card .thumb { height:130px; background:var(--surface2); margin-bottom:12px; }
+  .pick-card .cat { font-family:'JetBrains Mono',monospace; font-size:10px; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:8px; }
+  .pick-card h3 { font-family:'Lora',serif; font-size:19px; font-weight:600; margin:0 0 8px; line-height:1.25; }
+  .pick-card p { font-size:12.5px; color:var(--muted); margin:0; line-height:1.5; }
 
-  .rail-title { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink); margin-bottom: 4px; padding-bottom: 14px; border-bottom: 2px solid var(--ink); }
-  .rail-title::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 2px; }
-  .trend-row { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--line); }
-  .trend-row .n { font-size: 20px; font-weight: 800; color: var(--line); font-family: 'JetBrains Mono', ui-monospace, monospace; }
-  .trend-row .cat { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--accent); display: block; margin-bottom: 5px; }
-  .trend-row .t { font-size: 14px; font-weight: 600; line-height: 1.32; }
-  .trend-row .meta { font-size: 11.5px; color: var(--muted); margin-top: 5px; }
+  .trend-list { padding:0 0 40px; }
+  .trend-row { display:grid; grid-template-columns:40px 1fr; gap:14px; padding:14px 0; border-top:1px solid var(--line); }
+  .trend-row:first-of-type { border-top:none; }
+  .trend-row .num { font-family:'Lora',serif; font-size:24px; font-weight:600; color:var(--line); }
+  .trend-row .cat { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--accent); text-transform:uppercase; display:block; margin-bottom:4px; }
+  .trend-row .t { font-size:14.5px; font-weight:600; }
 
-  .movers { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .movers-row { display: flex; align-items: center; gap: 0; padding: 0; }
-  .movers-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); padding: 16px 22px 16px 0; border-right: 1px solid var(--line); white-space: nowrap; }
-  .mover { display: flex; flex-direction: column; padding: 16px 22px; border-right: 1px solid var(--line); min-width: 140px; }
-  .mover .sym { font-size: 13px; font-weight: 700; }
-  .mover .px { font-size: 15px; font-weight: 700; font-family: 'JetBrains Mono', ui-monospace, monospace; margin: 2px 0; }
-  .mover .chg { font-size: 12px; font-weight: 600; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  .latest-asym { display:grid; grid-template-columns:repeat(6,1fr); padding:40px 0 20px; }
+  .story { padding:0 22px 24px; border-right:1px solid var(--line); }
+  .story:last-child { border-right:none; }
+  .story.span-3 { grid-column:span 3; } .story.span-2 { grid-column:span 2; }
+  .story .cat { font-family:'JetBrains Mono',monospace; font-size:10px; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:8px; }
+  .story h3 { font-family:'Lora',serif; font-weight:600; margin:0 0 8px; line-height:1.22; }
+  .story.span-3 h3 { font-size:24px; } .story.span-2 h3 { font-size:19px; }
+  .story p { color:var(--muted); font-size:13px; line-height:1.5; margin:0; }
 
-  .section-head { display: flex; align-items: baseline; justify-content: space-between; padding: 44px 0 20px; }
-  .section-title { font-size: 22px; font-family: 'Lora', Georgia, serif; font-weight: 600; letter-spacing: 0em; }
-  .view-all { font-size: 13.5px; font-weight: 600; color: var(--accent); }
+  .follow-band { border-top:1px solid var(--ink); border-bottom:1px solid var(--ink); padding:16px 0; display:flex; align-items:center; justify-content:space-between; font-size:13px; }
+  .follow-band .links a { margin-left:20px; font-weight:700; }
+  .follow-band .links a:hover { color:var(--accent); }
 
-  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; padding-bottom: 60px; }
-  .story-card { display: flex; flex-direction: column; }
-  .story-card .thumb {
-    height: 150px; border-radius: var(--radius); margin-bottom: 14px;
-    background: linear-gradient(135deg, var(--surface-2), var(--surface));
-    border: 1px solid var(--line);
-    position: relative;
-  }
-  .story-card .thumb .cat {
-    position: absolute; left: 10px; top: 10px;
-    background: var(--paper); border: 1px solid var(--line);
-    font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em;
-    padding: 4px 9px; border-radius: var(--pill); color: var(--accent);
-  }
-  .story-card h3 { font-size: 16px; font-weight: 700; line-height: 1.32; margin: 0 0 8px; }
-  .story-card p { font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0 0 10px; flex-grow: 1; }
-  .story-card .meta { font-size: 11.5px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px; }
-  .story-card:hover h3 { color: var(--accent); }
+  footer.site { padding:22px 0; display:flex; justify-content:space-between; font-size:12px; color:var(--muted); }
 
-  footer.site { border-top: 1px solid var(--line); padding: 40px 0; }
-  .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 30px; }
-  .foot-grid p { color: var(--muted); font-size: 13px; max-width: 30ch; }
-  .foot-col-title { font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin-bottom: 12px; }
-  .foot-grid a { display: block; font-size: 13.5px; margin-bottom: 9px; color: var(--ink); }
-  .foot-grid a:hover { color: var(--accent); }
-  .foot-bottom { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); padding-top: 26px; margin-top: 26px; border-top: 1px solid var(--line); }
-
-  @media (max-width: 980px) {
-    .hero { grid-template-columns: 1fr; }
-    .grid-4 { grid-template-columns: repeat(2, 1fr); }
-    .foot-grid { grid-template-columns: repeat(2, 1fr); }
-  }
+  @media (max-width:960px) { .hero,.picks-row,.latest-asym { grid-template-columns:1fr; } .story { grid-column:span 1 !important; border-right:none; border-bottom:1px solid var(--line); padding-bottom:20px; margin-bottom:20px; } }
 </style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Nunito+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Nunito+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
 
-<div class="ticker-bar">
-  <div class="wrap ticker-row">
-    <div class="ticker-prices mono">
-      <span>BTC <b>$71,240</b> <span class="up">▲2.14%</span></span>
-      <span>ETH <b>$3,412</b> <span class="down">▼0.86%</span></span>
-      <span>SOL <b>$168.90</b> <span class="up">▲4.32%</span></span>
-      <span>BTC.D <b>52.1%</b></span>
-    </div>
-    <span>Thursday, August 27, 2026</span>
-  </div>
+<div class="wrap">
+  <div class="dateline"><span>Thursday, August 27, 2026 · Digital Edition</span><span>No. 214</span></div>
 </div>
 
 <header class="site">
   <div class="wrap header-row">
-    <div class="wordmark">Times of Crypto<span>Era</span></div>
-    <nav class="primary">
-      <a href="#">Latest</a>
-      <a href="#">Bitcoin</a>
-      <a href="#">Ethereum</a>
-      <a href="#">Solana</a>
-      <a href="#">DeFi</a>
-      <a href="#">Regulation</a>
-    </nav>
-    <div class="header-actions">
-      <span class="search-icon">⌕</span>
-      <a class="btn-primary" href="#">Subscribe</a>
-    </div>
-  </div>
-  <div class="wrap subnav">
-    <a href="#">Markets</a>
-    <a href="#">Policy</a>
-    <a href="#">Technology</a>
-    <a href="#">Explainers</a>
-    <span class="live">Breaking</span>
+    <div class="wordmark">Times of Crypto <em>Era</em></div>
+    <a class="btn" href="#">Subscribe</a>
   </div>
 </header>
+<nav class="subnav"><div class="wrap" style="display:flex; gap:24px;"><a href="#">Latest</a><a href="#">Bitcoin</a><a href="#">Ethereum</a><a href="#">Solana</a><a href="#">Contact</a></div></nav>
 
 <div class="wrap">
   <div class="hero">
     <div>
-      <div class="hero-media"><span class="cat-tag">Solana</span></div>
-      <h1>Why Solana Has Had Network Outages, and What&rsquo;s Changed</h1>
+      <div class="kicker">Lead Story — Solana</div>
+      <div class="hero-media"></div>
+      <h1 class="display">Why Solana Has Had Network Outages, and What&rsquo;s Changed</h1>
       <p class="dek">Solana went fully offline multiple times in its early years. Here is what actually caused those outages and the fixes that followed.</p>
-      <div class="byline">
-        <span class="avatar">M</span>
-        <span>Martin</span><span>·</span><span>Aug 26, 2026</span><span>·</span><span>6 min read</span>
-      </div>
+      <div class="byline">BY MARTIN · AUG 26, 2026</div>
     </div>
     <div>
-      <div class="rail-title">Trending Now</div>
-      <div class="trend-row"><span class="n">01</span><div><span class="cat">Solana</span><div class="t">How Solana Achieves High Throughput Where Other Chains Struggle</div><div class="meta">842 views · 3h ago</div></div></div>
-      <div class="trend-row"><span class="n">02</span><div><span class="cat">Ethereum</span><div class="t">What Layer-2 Rollups Actually Do for Ethereum</div><div class="meta">611 views · 1d ago</div></div></div>
-      <div class="trend-row"><span class="n">03</span><div><span class="cat">Ethereum</span><div class="t">What the Ethereum Merge Actually Changed</div><div class="meta">498 views · 1d ago</div></div></div>
-      <div class="trend-row"><span class="n">04</span><div><span class="cat">Regulation</span><div class="t">How Stablecoins Actually Keep Their Peg</div><div class="meta">355 views · 1d ago</div></div></div>
+      <div class="sidebar-card">
+        <h4>Join 12,000 Readers</h4>
+        <p>The Times of Crypto Era newsletter — one email, every weekday morning.</p>
+        <div class="sidebar-form"><input type="email" placeholder="you@email.com"><button>Subscribe</button></div>
+      </div>
+      <div class="sidebar-card">
+        <h4 style="font-size:15px;">Today&rsquo;s Snapshot</h4>
+        <div class="snap-row"><span>BTC</span><span class="px">$71,240</span></div>
+        <div class="snap-row"><span>ETH</span><span class="px">$3,412</span></div>
+        <div class="snap-row"><span>SOL</span><span class="px">$168.90</span></div>
+      </div>
     </div>
   </div>
+
+  <div class="band-title" style="margin-top:34px;">Editor&rsquo;s Picks <span class="tag">Hand-curated</span></div>
+  <div class="picks-row" style="padding-top:0;">
+    <div class="pick-card"><div class="thumb"></div><span class="cat">Ethereum</span><h3>What Layer-2 Rollups Actually Do for Ethereum</h3><p>Rollups bundle transactions off-chain and settle back to Ethereum.</p></div>
+    <div class="pick-card"><div class="thumb"></div><span class="cat">Regulation</span><h3>How Stablecoins Actually Keep Their Peg</h3><p>Reserves, redemption, and the mechanisms behind the peg.</p></div>
+    <div class="pick-card"><div class="thumb"></div><span class="cat">Bitcoin</span><h3>What Is Bitcoin Halving, and Why It Matters</h3><p>The scheduled cut to new BTC issuance, explained without the hype.</p></div>
+  </div>
+
+  <div class="band-title">Trending This Week <span class="tag">By reader attention</span></div>
+  <div class="trend-list">
+    <div class="trend-row"><span class="num">1</span><div><span class="cat">Solana</span><div class="t">How Solana Achieves High Throughput Where Other Chains Struggle</div></div></div>
+    <div class="trend-row"><span class="num">2</span><div><span class="cat">Ethereum</span><div class="t">What the Ethereum Merge Actually Changed</div></div></div>
+    <div class="trend-row"><span class="num">3</span><div><span class="cat">DeFi</span><div class="t">What Is DeFi? A Plain Explanation of Decentralized Finance</div></div></div>
+  </div>
+
+  <div class="band-title">Latest News <span class="tag">All coverage</span></div>
 </div>
 
-<div class="movers">
-  <div class="wrap movers-row">
-    <span class="movers-label">Market Movers</span>
-    <div class="mover"><span class="sym">BTC</span><span class="px">$71,240</span><span class="chg up">▲ 2.14%</span></div>
-    <div class="mover"><span class="sym">ETH</span><span class="px">$3,412</span><span class="chg down">▼ 0.86%</span></div>
-    <div class="mover"><span class="sym">SOL</span><span class="px">$168.90</span><span class="chg up">▲ 4.32%</span></div>
-    <div class="mover"><span class="sym">Gas (ETH)</span><span class="px">18 gwei</span><span class="chg" style="color:var(--muted);">Normal</span></div>
-    <div class="mover"><span class="sym">Fear &amp; Greed</span><span class="px">61</span><span class="chg up">Greed</span></div>
-  </div>
+<div class="wrap latest-asym">
+  <div class="story span-3"><span class="cat">Bitcoin</span><h3 class="display">What Is Bitcoin Halving, and Why It Matters for Supply</h3><p>The scheduled cut to new BTC issuance, explained without the hype.</p></div>
+  <div class="story span-3"><span class="cat">DeFi</span><h3 class="display">What Is DeFi? A Plain Explanation of Decentralized Finance</h3><p>Lending, trading, and yield without a bank in the middle.</p></div>
+  <div class="story span-2"><span class="cat">Regulation</span><h3 class="display">How Stablecoins Actually Keep Their Peg</h3><p>Reserves, redemption, and the mechanisms that hold the peg.</p></div>
+  <div class="story span-2"><span class="cat">Ethereum</span><h3 class="display">What the Ethereum Merge Actually Changed</h3><p>Proof of stake, and what shifted under the hood.</p></div>
+  <div class="story span-2"><span class="cat">Ethereum</span><h3 class="display">What Layer-2 Rollups Actually Do</h3><p>The actual settlement mechanism, explained.</p></div>
 </div>
 
 <div class="wrap">
-  <div class="section-head"><div class="section-title">Latest News</div><a class="view-all" href="#">View all →</a></div>
-  <div class="grid-4">
-    <div class="story-card"><div class="thumb"><span class="cat">Bitcoin</span></div><h3>What Is Bitcoin Halving, and Why It Matters for Supply</h3><p>The scheduled cut to new BTC issuance, explained without the hype.</p><div class="meta">Martin · Aug 26, 2026</div></div>
-    <div class="story-card"><div class="thumb"><span class="cat">DeFi</span></div><h3>What Is DeFi? A Plain Explanation of Decentralized Finance</h3><p>Lending, trading, and yield without a bank in the middle.</p><div class="meta">Martin · Aug 26, 2026</div></div>
-    <div class="story-card"><div class="thumb"><span class="cat">Regulation</span></div><h3>How Stablecoins Actually Keep Their Peg</h3><p>Reserves, redemption, and the mechanisms that hold a dollar-pegged token to a dollar.</p><div class="meta">Martin · Aug 26, 2026</div></div>
-    <div class="story-card"><div class="thumb"><span class="cat">Ethereum</span></div><h3>What the Ethereum Merge Actually Changed</h3><p>Proof of stake, issuance, and what shifted under the hood.</p><div class="meta">Martin · Aug 26, 2026</div></div>
-    <div class="story-card"><div class="thumb"><span class="cat">Ethereum</span></div><h3>What Layer-2 Rollups Actually Do for Ethereum</h3><p>Rollups bundle transactions off-chain and settle back to Ethereum.</p><div class="meta">Martin · Aug 25, 2026</div></div>
-    <div class="story-card"><div class="thumb"><span class="cat">Solana</span></div><h3>How Solana Achieves High Throughput Where Other Chains Struggle</h3><p>Proof of History and parallel execution, and the reliability tradeoffs that came with them.</p><div class="meta">Martin · Aug 26, 2026</div></div>
-    <div class="story-card"><div class="thumb"><span class="cat">Solana</span></div><h3>Why Solana Has Had Network Outages, and What&rsquo;s Changed</h3><p>What actually caused the outages, and the fixes that followed.</p><div class="meta">Martin · Aug 26, 2026</div></div>
-    <div class="story-card"><div class="thumb"><span class="cat">Bitcoin</span></div><h3>ATLAS Exchange Infrastructure Draws Wall Street Attention to LayerZero</h3><p>A rare pairing of a small-cap altcoin with major market-structure names.</p><div class="meta">Martin · Aug 25, 2026</div></div>
+  <div class="follow-band">
+    <span>Follow our coverage</span>
+    <div class="links"><a href="#">X / Twitter</a><a href="#">Telegram</a><a href="#">LinkedIn</a></div>
   </div>
 </div>
 
 <footer class="site">
-  <div class="wrap">
-    <div class="foot-grid">
-      <div><div class="wordmark">Times of Crypto<span>Era</span></div><p>Bitcoin, DeFi, and market coverage you can verify.</p></div>
-      <div><div class="foot-col-title">Coverage</div><a href="#">Bitcoin</a><a href="#">Ethereum</a><a href="#">Solana</a><a href="#">DeFi</a></div>
-      <div><div class="foot-col-title">About</div><a href="#">Contact</a><a href="#">Editorial Standards</a><a href="#">Corrections Policy</a></div>
-      <div><div class="foot-col-title">Follow</div><a href="#">X / Twitter</a><a href="#">LinkedIn</a></div>
-    </div>
-    <div class="foot-bottom"><span>© 2026 Times of Crypto Era</span><span>Prices are indicative, not investment advice.</span></div>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
+    <span>© 2026 Times of Crypto Era</span>
+    <span>EMBER</span>
   </div>
 </footer>
 </body>

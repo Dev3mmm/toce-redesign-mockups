@@ -8,227 +8,155 @@
 <body>
 <style>
   :root {
-    --ink: #f2f3f2;
-    --paper: #0d0f0e;
-    --surface: #141716;
-    --surface-2: #1a1e1c;
-    --line: #242928;
-    --muted: #828a87;
-    --accent: #35d69a;
-    --accent-soft: rgba(53,214,154,0.12);
-    --breaking: #ff6a4d;
-    --up: #35d69a;
-    --down: #ff6a4d;
-    --radius: 10px;
-    --pill: 6px;
+    --ink:#f2f3f2; --paper:#0d0f0e; --surface:#141716; --surface2:#1a1e1c; --line:#242928;
+    --muted:#828a87; --accent:#35d69a; --accent-soft:rgba(53,214,154,0.12); --up:#35d69a; --down:#ff6a4d;
   }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:'Manrope',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; text-decoration:none; }
+  .display { font-weight:700; letter-spacing:-0.015em; text-wrap:balance; }
+  .mono { font-family:'Space Mono',ui-monospace,monospace; font-variant-numeric:tabular-nums; }
+  .wrap { max-width:1240px; margin:0 auto; padding:0 32px; }
 
-  * { box-sizing: border-box; }
+  .live-line { border-bottom:1px solid var(--line); padding:9px 0; font-family:'Space Mono',monospace; font-size:11px; color:var(--muted); display:flex; justify-content:space-between; }
+  .live-line .dot { color:var(--accent); }
 
-  body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'Manrope', system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
+  header.site { padding:20px 0; border-bottom:1px solid var(--line); }
+  .header-row { display:flex; align-items:center; justify-content:space-between; }
+  .wordmark { font-weight:700; font-size:19px; }
+  .wordmark span { color:var(--accent); }
+  nav.primary { display:flex; gap:24px; font-size:13.5px; font-weight:500; color:var(--muted); }
+  nav.primary a:hover { color:var(--ink); }
+  .btn-primary { background:var(--accent); color:#08120e; padding:9px 18px; border-radius:6px; font-size:13px; font-weight:700; }
 
-  a { color: inherit; text-decoration: none; }
-  .display { font-family: 'Manrope', system-ui, sans-serif; font-weight: 700; letter-spacing: -0.015em; text-wrap: balance; }
-  .mono { font-family: 'Space Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+  .hero { display:grid; grid-template-columns:1.5fr 1fr; gap:40px; padding:36px 0 0; }
+  .kicker { font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); margin-bottom:16px; }
+  .hero-media { height:320px; border-radius:10px; background:linear-gradient(135deg,var(--accent),var(--surface2)); margin-bottom:18px; }
+  .hero h1 { font-size:34px; line-height:1.12; margin:0 0 14px; }
+  .hero .dek { font-size:15px; line-height:1.6; color:var(--muted); max-width:56ch; margin:0 0 16px; }
+  .byline { font-family:'Space Mono',monospace; font-size:11.5px; color:var(--muted); }
 
-  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+  /* Gainers / Losers table */
+  .movers-title { font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
+  .movers-cols { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:24px; }
+  .movers-col-title { font-size:11px; font-weight:700; padding-bottom:8px; border-bottom:1px solid var(--line); margin-bottom:8px; }
+  .movers-col-title.gain { color:var(--up); } .movers-col-title.lose { color:var(--down); }
+  .mover-row { display:flex; justify-content:space-between; padding:8px 0; font-size:12.5px; }
+  .mover-row .sym { font-weight:700; }
+  .mover-row.gain .chg { color:var(--up); font-family:'Space Mono',monospace; }
+  .mover-row.lose .chg { color:var(--down); font-family:'Space Mono',monospace; }
 
-  .ticker-bar { background: #141716; color: #828a87; }
-  .ticker-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; font-size: 12px; }
-  .ticker-prices { display: flex; gap: 22px; }
-  .ticker-prices b { color: #fff; font-weight: 700; }
-  .up { color: var(--up); } .down { color: var(--down); }
+  .fg-inline { display:flex; justify-content:space-between; align-items:center; background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:14px 16px; font-size:13px; }
+  .fg-inline .val { font-family:'Space Mono',monospace; font-weight:700; color:var(--accent); }
 
-  header.site { border-bottom: 1px solid var(--line); }
-  .header-row { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; }
-  .wordmark { font-family: 'Manrope', system-ui, sans-serif; font-weight: 700; font-size: 21px; letter-spacing: -0.015em; }
-  .wordmark span { color: var(--accent); }
-  nav.primary { display: flex; gap: 28px; font-size: 14.5px; font-weight: 500; }
-  nav.primary a:hover { color: var(--accent); }
-  .header-actions { display: flex; align-items: center; gap: 16px; }
-  .search-icon { width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 15px; }
-  .btn-primary { background: var(--accent); color: #0d0f0e; padding: 10px 18px; border-radius: var(--pill); font-size: 13.5px; font-weight: 700; }
+  /* Dense trending list, full width */
+  .trend-section { padding:40px 0 0; border-top:1px solid var(--line); margin-top:40px; }
+  .trend-row { display:grid; grid-template-columns:36px 100px 1fr auto; gap:18px; align-items:center; padding:14px 0; border-bottom:1px solid var(--line); font-size:14px; }
+  .trend-row .n { font-family:'Space Mono',monospace; color:var(--line); font-size:16px; -webkit-text-stroke:1px var(--muted); }
+  .trend-row .cat { font-family:'Space Mono',monospace; font-size:10.5px; color:var(--accent); text-transform:uppercase; }
+  .trend-row .t { font-weight:600; }
+  .trend-row .v { font-family:'Space Mono',monospace; font-size:11.5px; color:var(--muted); }
+  .trend-row:hover .t { color:var(--accent); }
 
-  .subnav { border-bottom: 1px solid var(--line); padding: 12px 0; display: flex; align-items: center; gap: 22px; }
-  .subnav a { font-size: 13px; color: var(--muted); font-weight: 500; }
-  .subnav a:hover { color: var(--ink); }
-  .subnav .live { display: inline-flex; align-items: center; gap: 6px; color: var(--breaking); font-weight: 700; font-size: 12px; letter-spacing: 0.02em; margin-left: auto; }
-  .subnav .live::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--breaking); animation: blink 1.6s infinite; }
-  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
-  @media (prefers-reduced-motion: reduce) { .subnav .live::before { animation: none; } }
+  /* Telegram alpha CTA */
+  .alpha-cta { margin:44px 0; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:26px 30px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+  .alpha-cta .icon { width:44px; height:44px; border-radius:10px; background:var(--accent-soft); color:var(--accent); display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; }
+  .alpha-cta h3 { margin:0 0 4px; font-size:16px; }
+  .alpha-cta p { margin:0; color:var(--muted); font-size:12.5px; }
+  .alpha-cta button { background:var(--accent); color:#08120e; border:none; padding:11px 20px; border-radius:8px; font-weight:700; font-size:13px; white-space:nowrap; }
 
-  .hero { display: grid; grid-template-columns: 1.65fr 1fr; gap: 44px; padding: 40px 0 48px; }
-  .hero-media {
-    height: 360px; border-radius: var(--radius); margin-bottom: 20px; overflow: hidden;
-    background: linear-gradient(135deg, var(--accent), var(--surface-2) 130%);
-    position: relative;
-  }
-  .hero-media .cat-tag {
-    position: absolute; left: 18px; bottom: 18px;
-    background: rgba(0,0,0,0.55); color: #fff; backdrop-filter: blur(6px);
-    font-size: 11.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
-    padding: 6px 12px; border-radius: var(--pill);
-  }
-  .hero h1 { font-size: 38px; line-height: 1.1; margin: 0 0 14px; font-family: 'Manrope', system-ui, sans-serif; font-weight: 700; letter-spacing: -0.015em; }
-  .hero .dek { font-size: 16px; line-height: 1.6; color: var(--muted); max-width: 60ch; margin: 0 0 18px; }
-  .byline { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
-  .avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--surface-2); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--muted); }
+  .section-head { display:flex; justify-content:space-between; align-items:baseline; padding:0 0 18px; }
+  .section-title { font-size:19px; font-weight:700; }
+  .view-all { font-size:13px; color:var(--accent); font-weight:600; }
 
-  .rail-title { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink); margin-bottom: 4px; padding-bottom: 14px; border-bottom: 2px solid var(--ink); }
-  .rail-title::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 2px; }
-  .trend-row { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--line); }
-  .trend-row .n { font-size: 20px; font-weight: 800; color: var(--line); font-family: 'Space Mono', ui-monospace, monospace; }
-  .trend-row .cat { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--accent); display: block; margin-bottom: 5px; }
-  .trend-row .t { font-size: 14px; font-weight: 600; line-height: 1.32; }
-  .trend-row .meta { font-size: 11.5px; color: var(--muted); margin-top: 5px; }
+  .dense-list { padding-bottom:60px; }
+  .dense-row { display:grid; grid-template-columns:90px 100px 1fr; gap:18px; padding:16px 0; border-bottom:1px solid var(--line); align-items:baseline; }
+  .dense-row .time { font-family:'Space Mono',monospace; font-size:11px; color:var(--muted); }
+  .dense-row .cat { font-family:'Space Mono',monospace; font-size:10.5px; color:var(--accent); text-transform:uppercase; }
+  .dense-row .t { font-size:15px; font-weight:600; }
+  .dense-row:hover .t { color:var(--accent); }
 
-  .movers { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .movers-row { display: flex; align-items: center; gap: 0; padding: 0; }
-  .movers-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); padding: 16px 22px 16px 0; border-right: 1px solid var(--line); white-space: nowrap; }
-  .mover { display: flex; flex-direction: column; padding: 16px 22px; border-right: 1px solid var(--line); min-width: 140px; }
-  .mover .sym { font-size: 13px; font-weight: 700; }
-  .mover .px { font-size: 15px; font-weight: 700; font-family: 'Space Mono', ui-monospace, monospace; margin: 2px 0; }
-  .mover .chg { font-size: 12px; font-weight: 600; font-family: 'Space Mono', ui-monospace, monospace; }
+  footer.site { border-top:1px solid var(--line); padding:26px 0; display:flex; justify-content:space-between; font-size:12px; color:var(--muted); }
 
-  .section-head { display: flex; align-items: baseline; justify-content: space-between; padding: 44px 0 20px; }
-  .section-title { font-size: 22px; font-family: 'Manrope', system-ui, sans-serif; font-weight: 700; letter-spacing: -0.015em; }
-  .view-all { font-size: 13.5px; font-weight: 600; color: var(--accent); }
-
-  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; padding-bottom: 60px; }
-  .story-card { display: flex; flex-direction: column; }
-  .story-card .thumb {
-    height: 150px; border-radius: var(--radius); margin-bottom: 14px;
-    background: linear-gradient(135deg, var(--surface-2), var(--surface));
-    border: 1px solid var(--line);
-    position: relative;
-  }
-  .story-card .thumb .cat {
-    position: absolute; left: 10px; top: 10px;
-    background: var(--paper); border: 1px solid var(--line);
-    font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em;
-    padding: 4px 9px; border-radius: var(--pill); color: var(--accent);
-  }
-  .story-card h3 { font-size: 16px; font-weight: 700; line-height: 1.32; margin: 0 0 8px; }
-  .story-card p { font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0 0 10px; flex-grow: 1; }
-  .story-card .meta { font-size: 11.5px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px; }
-  .story-card:hover h3 { color: var(--accent); }
-
-  footer.site { border-top: 1px solid var(--line); padding: 40px 0; }
-  .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 30px; }
-  .foot-grid p { color: var(--muted); font-size: 13px; max-width: 30ch; }
-  .foot-col-title { font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin-bottom: 12px; }
-  .foot-grid a { display: block; font-size: 13.5px; margin-bottom: 9px; color: var(--ink); }
-  .foot-grid a:hover { color: var(--accent); }
-  .foot-bottom { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); padding-top: 26px; margin-top: 26px; border-top: 1px solid var(--line); }
-
-  @media (max-width: 980px) {
-    .hero { grid-template-columns: 1fr; }
-    .grid-4 { grid-template-columns: repeat(2, 1fr); }
-    .foot-grid { grid-template-columns: repeat(2, 1fr); }
-  }
+  @media (max-width:960px) { .hero,.movers-cols { grid-template-columns:1fr; } .trend-row,.dense-row { grid-template-columns:1fr; row-gap:4px; } .alpha-cta { flex-direction:column; align-items:flex-start; } }
 </style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Manrope:wght@400;500&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap">
 
-<div class="ticker-bar">
-  <div class="wrap ticker-row">
-    <div class="ticker-prices mono">
-      <span>BTC <b>$71,240</b> <span class="up">▲2.14%</span></span>
-      <span>ETH <b>$3,412</b> <span class="down">▼0.86%</span></span>
-      <span>SOL <b>$168.90</b> <span class="up">▲4.32%</span></span>
-      <span>BTC.D <b>52.1%</b></span>
-    </div>
-    <span>Thursday, August 27, 2026</span>
+<div class="live-line">
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
+    <span><span class="dot">●</span> LIVE · AUG 27 2026 14:02 UTC</span>
+    <span>BTC $71,240 &nbsp; ETH $3,412 &nbsp; SOL $168.90</span>
   </div>
 </div>
 
 <header class="site">
   <div class="wrap header-row">
     <div class="wordmark">Times of Crypto<span>Era</span></div>
-    <nav class="primary">
-      <a href="#">Latest</a>
-      <a href="#">Bitcoin</a>
-      <a href="#">Ethereum</a>
-      <a href="#">Solana</a>
-      <a href="#">DeFi</a>
-      <a href="#">Regulation</a>
-    </nav>
-    <div class="header-actions">
-      <span class="search-icon">⌕</span>
-      <a class="btn-primary" href="#">Subscribe</a>
-    </div>
-  </div>
-  <div class="wrap subnav">
-    <a href="#">Markets</a>
-    <a href="#">Policy</a>
-    <a href="#">Technology</a>
-    <a href="#">Explainers</a>
-    <span class="live">Breaking</span>
+    <nav class="primary"><a href="#">Latest</a><a href="#">Bitcoin</a><a href="#">Ethereum</a><a href="#">Solana</a><a href="#">DeFi</a></nav>
+    <a class="btn-primary" href="#">Subscribe</a>
   </div>
 </header>
 
 <div class="wrap">
   <div class="hero">
     <div>
-      <div class="hero-media"><span class="cat-tag">Solana</span></div>
-      <h1>Why Solana Has Had Network Outages, and What&rsquo;s Changed</h1>
+      <div class="kicker">Solana · Lead Story</div>
+      <div class="hero-media"></div>
+      <h1 class="display">Why Solana Has Had Network Outages, and What&rsquo;s Changed</h1>
       <p class="dek">Solana went fully offline multiple times in its early years. Here is what actually caused those outages and the fixes that followed.</p>
-      <div class="byline">
-        <span class="avatar">M</span>
-        <span>Martin</span><span>·</span><span>Aug 26, 2026</span><span>·</span><span>6 min read</span>
-      </div>
+      <div class="byline">MARTIN · AUG 26, 2026 · 6 MIN READ</div>
     </div>
     <div>
-      <div class="rail-title">Trending Now</div>
-      <div class="trend-row"><span class="n">01</span><div><span class="cat">Solana</span><div class="t">How Solana Achieves High Throughput Where Other Chains Struggle</div><div class="meta">842 views · 3h ago</div></div></div>
-      <div class="trend-row"><span class="n">02</span><div><span class="cat">Ethereum</span><div class="t">What Layer-2 Rollups Actually Do for Ethereum</div><div class="meta">611 views · 1d ago</div></div></div>
-      <div class="trend-row"><span class="n">03</span><div><span class="cat">Ethereum</span><div class="t">What the Ethereum Merge Actually Changed</div><div class="meta">498 views · 1d ago</div></div></div>
-      <div class="trend-row"><span class="n">04</span><div><span class="cat">Regulation</span><div class="t">How Stablecoins Actually Keep Their Peg</div><div class="meta">355 views · 1d ago</div></div></div>
+      <div class="movers-title">Gainers &amp; Losers · 24H</div>
+      <div class="movers-cols">
+        <div>
+          <div class="movers-col-title gain">Top Gainers</div>
+          <div class="mover-row gain"><span class="sym">DOGE</span><span class="chg">▲6.71%</span></div>
+          <div class="mover-row gain"><span class="sym">SOL</span><span class="chg">▲4.32%</span></div>
+          <div class="mover-row gain"><span class="sym">BTC</span><span class="chg">▲2.14%</span></div>
+        </div>
+        <div>
+          <div class="movers-col-title lose">Top Losers</div>
+          <div class="mover-row lose"><span class="sym">ETH</span><span class="chg">▼0.86%</span></div>
+          <div class="mover-row lose"><span class="sym">ARB</span><span class="chg">▼1.42%</span></div>
+          <div class="mover-row lose"><span class="sym">OP</span><span class="chg">▼2.05%</span></div>
+        </div>
+      </div>
+      <div class="fg-inline"><span>Fear &amp; Greed Index</span><span class="val">61 — Greed</span></div>
     </div>
   </div>
-</div>
 
-<div class="movers">
-  <div class="wrap movers-row">
-    <span class="movers-label">Market Movers</span>
-    <div class="mover"><span class="sym">BTC</span><span class="px">$71,240</span><span class="chg up">▲ 2.14%</span></div>
-    <div class="mover"><span class="sym">ETH</span><span class="px">$3,412</span><span class="chg down">▼ 0.86%</span></div>
-    <div class="mover"><span class="sym">SOL</span><span class="px">$168.90</span><span class="chg up">▲ 4.32%</span></div>
-    <div class="mover"><span class="sym">Gas (ETH)</span><span class="px">18 gwei</span><span class="chg" style="color:var(--muted);">Normal</span></div>
-    <div class="mover"><span class="sym">Fear &amp; Greed</span><span class="px">61</span><span class="chg up">Greed</span></div>
+  <div class="trend-section">
+    <div class="movers-title">Trending Now</div>
+    <div class="trend-row"><span class="n">01</span><span class="cat">Solana</span><span class="t">How Solana Achieves High Throughput Where Other Chains Struggle</span><span class="v">842 views</span></div>
+    <div class="trend-row"><span class="n">02</span><span class="cat">Ethereum</span><span class="t">What Layer-2 Rollups Actually Do for Ethereum</span><span class="v">611 views</span></div>
+    <div class="trend-row"><span class="n">03</span><span class="cat">Ethereum</span><span class="t">What the Ethereum Merge Actually Changed</span><span class="v">498 views</span></div>
   </div>
-</div>
 
-<div class="wrap">
+  <div class="alpha-cta">
+    <div style="display:flex; align-items:center; gap:16px;">
+      <span class="icon">TG</span>
+      <div><h3>Join the Alpha Channel</h3><p>Real-time market moves and on-chain flags, straight to Telegram.</p></div>
+    </div>
+    <button>Join Free</button>
+  </div>
+
   <div class="section-head"><div class="section-title">Latest News</div><a class="view-all" href="#">View all →</a></div>
-  <div class="grid-4">
-    <div class="story-card"><div class="thumb"><span class="cat">Bitcoin</span></div><h3>What Is Bitcoin Halving, and Why It Matters for Supply</h3><p>The scheduled cut to new BTC issuance, explained without the hype.</p><div class="meta">Martin · Aug 26, 2026</div></div>
-    <div class="story-card"><div class="thumb"><span class="cat">DeFi</span></div><h3>What Is DeFi? A Plain Explanation of Decentralized Finance</h3><p>Lending, trading, and yield without a bank in the middle.</p><div class="meta">Martin · Aug 26, 2026</div></div>
-    <div class="story-card"><div class="thumb"><span class="cat">Regulation</span></div><h3>How Stablecoins Actually Keep Their Peg</h3><p>Reserves, redemption, and the mechanisms that hold a dollar-pegged token to a dollar.</p><div class="meta">Martin · Aug 26, 2026</div></div>
-    <div class="story-card"><div class="thumb"><span class="cat">Ethereum</span></div><h3>What the Ethereum Merge Actually Changed</h3><p>Proof of stake, issuance, and what shifted under the hood.</p><div class="meta">Martin · Aug 26, 2026</div></div>
-    <div class="story-card"><div class="thumb"><span class="cat">Ethereum</span></div><h3>What Layer-2 Rollups Actually Do for Ethereum</h3><p>Rollups bundle transactions off-chain and settle back to Ethereum.</p><div class="meta">Martin · Aug 25, 2026</div></div>
-    <div class="story-card"><div class="thumb"><span class="cat">Solana</span></div><h3>How Solana Achieves High Throughput Where Other Chains Struggle</h3><p>Proof of History and parallel execution, and the reliability tradeoffs that came with them.</p><div class="meta">Martin · Aug 26, 2026</div></div>
-    <div class="story-card"><div class="thumb"><span class="cat">Solana</span></div><h3>Why Solana Has Had Network Outages, and What&rsquo;s Changed</h3><p>What actually caused the outages, and the fixes that followed.</p><div class="meta">Martin · Aug 26, 2026</div></div>
-    <div class="story-card"><div class="thumb"><span class="cat">Bitcoin</span></div><h3>ATLAS Exchange Infrastructure Draws Wall Street Attention to LayerZero</h3><p>A rare pairing of a small-cap altcoin with major market-structure names.</p><div class="meta">Martin · Aug 25, 2026</div></div>
+  <div class="dense-list">
+    <div class="dense-row"><span class="time">09:41</span><span class="cat">Bitcoin</span><span class="t">What Is Bitcoin Halving, and Why It Matters for Supply</span></div>
+    <div class="dense-row"><span class="time">Yesterday</span><span class="cat">DeFi</span><span class="t">What Is DeFi? A Plain Explanation of Decentralized Finance</span></div>
+    <div class="dense-row"><span class="time">Yesterday</span><span class="cat">Regulation</span><span class="t">How Stablecoins Actually Keep Their Peg</span></div>
+    <div class="dense-row"><span class="time">2 days ago</span><span class="cat">Ethereum</span><span class="t">What the Ethereum Merge Actually Changed</span></div>
+    <div class="dense-row"><span class="time">2 days ago</span><span class="cat">Ethereum</span><span class="t">What Layer-2 Rollups Actually Do for Ethereum</span></div>
   </div>
 </div>
 
 <footer class="site">
-  <div class="wrap">
-    <div class="foot-grid">
-      <div><div class="wordmark">Times of Crypto<span>Era</span></div><p>Bitcoin, DeFi, and market coverage you can verify.</p></div>
-      <div><div class="foot-col-title">Coverage</div><a href="#">Bitcoin</a><a href="#">Ethereum</a><a href="#">Solana</a><a href="#">DeFi</a></div>
-      <div><div class="foot-col-title">About</div><a href="#">Contact</a><a href="#">Editorial Standards</a><a href="#">Corrections Policy</a></div>
-      <div><div class="foot-col-title">Follow</div><a href="#">X / Twitter</a><a href="#">LinkedIn</a></div>
-    </div>
-    <div class="foot-bottom"><span>© 2026 Times of Crypto Era</span><span>Prices are indicative, not investment advice.</span></div>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
+    <span>© 2026 Times of Crypto Era</span>
+    <span>OBSIDIAN</span>
   </div>
 </footer>
 </body>

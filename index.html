@@ -6,63 +6,89 @@
 <title>Times of Crypto Era — Redesign Directions</title>
 <style>
   body { margin:0; background:#0b0c0e; color:#eee; font-family:system-ui,sans-serif; padding:60px 24px; }
-  .wrap { max-width:820px; margin:0 auto; }
+  .wrap { max-width:860px; margin:0 auto; }
   h1 { font-size:28px; margin-bottom:8px; }
   p.lead { color:#9aa1ac; line-height:1.5; }
   h2.group { font-size:13px; text-transform:uppercase; letter-spacing:0.08em; color:#6b6f78; margin-top:34px; margin-bottom:12px; }
-  .grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-  .card { display:block; border:1px solid #2a2e37; border-radius:12px; padding:20px 22px; text-decoration:none; color:inherit; }
-  .card:hover { border-color:#3d5afe; }
-  .card h3 { margin:0 0 6px; font-size:17px; }
-  .card span { color:#9aa1ac; font-size:13.5px; line-height:1.4; display:block; }
+  .card { display:block; border:1px solid #2a2e37; border-radius:12px; padding:22px 24px; margin-bottom:14px; text-decoration:none; color:inherit; }
+  .card:hover { border-color:#c04dff; }
   .swatch { display:inline-flex; gap:4px; margin-bottom:10px; }
   .swatch i { width:16px; height:16px; border-radius:4px; display:inline-block; }
-  .flagship { display:block; border:2px solid #0b5fff; background:#0b5fff14; border-radius:12px; padding:22px; text-decoration:none; color:inherit; }
-  .flagship h3 { margin:0 0 6px; font-size:18px; }
-  .flagship span { color:#9aa1ac; font-size:13.5px; }
-  .rec { display:inline-block; background:#0b5fff; color:#fff; font-size:10px; font-weight:700; letter-spacing:0.05em; padding:3px 8px; border-radius:5px; margin-left:8px; vertical-align:middle; }
-  @media (max-width:600px) { .grid { grid-template-columns:1fr; } }
+  .card h3 { margin:0 0 6px; font-size:18px; }
+  .card .desc { color:#9aa1ac; font-size:13.5px; line-height:1.5; display:block; margin-bottom:10px; }
+  .features { display:flex; flex-wrap:wrap; gap:6px; }
+  .feat { font-size:11px; background:#1b1d24; border:1px solid #2a2e37; color:#c9cdd6; padding:3px 9px; border-radius:999px; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>Times of Crypto Era — Redesign Directions</h1>
-  <p class="lead">Five distinct brand executions of the same real crypto-news layout (ticker, breaking badge, trending rail, market movers, story grid) — like five competing outlets, not five art projects.</p>
+  <p class="lead">Five distinct products, not five reskins — each has its own module set, its own layout logic, and its own extra features (not just recolored copies of the same page).</p>
 
-  <h2 class="group">Five brand directions</h2>
-  <div class="grid">
-    <a class="card" href="./meridian.html">
-      <div class="swatch"><i style="background:#1b2a3d"></i><i style="background:#b8842a"></i><i style="background:#faf7f0"></i></div>
-      <h3>Meridian</h3>
-      <span>Financial-authority. Navy on warm paper, deep gold accent, slab-serif headlines. Bloomberg/WSJ-adjacent gravitas.</span>
-    </a>
-    <a class="card" href="./volt.html">
-      <div class="swatch"><i style="background:#0a0b0f"></i><i style="background:#3d5afe"></i><i style="background:#ffffff;border:1px solid #333"></i></div>
-      <h3>Volt</h3>
-      <span>Consumer fintech energy. White ground, electric blue, rounded pills. Coinbase/Robinhood-adjacent.</span>
-    </a>
-    <a class="card" href="./obsidian.html">
-      <div class="swatch"><i style="background:#0d0f0e"></i><i style="background:#35d69a"></i><i style="background:#f2f3f2"></i></div>
-      <h3>Obsidian</h3>
-      <span>Premium dark minimalism. Near-black, crisp white type, muted emerald accent. The Block-adjacent pro feel.</span>
-    </a>
-    <a class="card" href="./ember.html">
-      <div class="swatch"><i style="background:#241a12"></i><i style="background:#c1541c"></i><i style="background:#fbf3e7"></i></div>
-      <h3>Ember</h3>
-      <span>Warm editorial authority. Cream paper, burnt-orange masthead, classic serif. CoinDesk-adjacent.</span>
-    </a>
-    <a class="card" href="./pulse.html">
-      <div class="swatch"><i style="background:#120a1f"></i><i style="background:#c04dff"></i><i style="background:#f5f1fa"></i></div>
-      <h3>Pulse</h3>
-      <span>Bold crypto-native energy. Deep violet ground, vivid magenta accent, condensed display type. Decrypt-adjacent.</span>
-    </a>
-  </div>
+  <h2 class="group">Five directions</h2>
+
+  <a class="card" href="./meridian.html">
+    <div class="swatch"><i style="background:#1b2a3d"></i><i style="background:#b8842a"></i><i style="background:#faf7f0"></i></div>
+    <h3>Meridian</h3>
+    <span class="desc">Financial-authority desk. No card grid — dense editorial rows, like a real financial paper.</span>
+    <div class="features">
+      <span class="feat">Fear &amp; Greed gauge</span>
+      <span class="feat">"Morning Ledger" email band</span>
+      <span class="feat">Snapshot mini-table</span>
+      <span class="feat">Social in utility bar</span>
+    </div>
+  </a>
+
+  <a class="card" href="./volt.html">
+    <div class="swatch"><i style="background:#0a0b0f"></i><i style="background:#3d5afe"></i><i style="background:#ffffff;border:1px solid #333"></i></div>
+    <h3>Volt</h3>
+    <span class="desc">Consumer fintech app feel. No plain ticker bar — coin cards with live sparklines instead.</span>
+    <div class="features">
+      <span class="feat">Sparkline coin cards</span>
+      <span class="feat">Horizontal trending chips</span>
+      <span class="feat">Email CTA embedded in the grid</span>
+      <span class="feat">Social buttons in header</span>
+    </div>
+  </a>
+
+  <a class="card" href="./obsidian.html">
+    <div class="swatch"><i style="background:#0d0f0e"></i><i style="background:#35d69a"></i><i style="background:#f2f3f2"></i></div>
+    <h3>Obsidian</h3>
+    <span class="desc">Pro-trader dark terminal. Data-first sidebar, dense list instead of a card grid.</span>
+    <div class="features">
+      <span class="feat">Gainers / Losers table</span>
+      <span class="feat">Inline Fear &amp; Greed readout</span>
+      <span class="feat">Telegram "Alpha Channel" CTA</span>
+      <span class="feat">Dense list, no thumbnails</span>
+    </div>
+  </a>
+
+  <a class="card" href="./ember.html">
+    <div class="swatch"><i style="background:#241a12"></i><i style="background:#c1541c"></i><i style="background:#fbf3e7"></i></div>
+    <h3>Ember</h3>
+    <span class="desc">Warm editorial masthead. No live ticker at all — this outlet leads with journalism, not the tape.</span>
+    <div class="features">
+      <span class="feat">Editor's Picks (curated, distinct from Trending)</span>
+      <span class="feat">Newsletter sidebar box</span>
+      <span class="feat">Asymmetric newspaper grid</span>
+      <span class="feat">"Follow our coverage" band</span>
+    </div>
+  </a>
+
+  <a class="card" href="./pulse.html">
+    <div class="swatch"><i style="background:#120a1f"></i><i style="background:#c04dff"></i><i style="background:#f5f1fa"></i></div>
+    <h3>Pulse</h3>
+    <span class="desc">Bold social-native crypto brand. Sidebar is live stats, not more articles.</span>
+    <div class="features">
+      <span class="feat">Trending on X (social commentary cards)</span>
+      <span class="feat">Crypto Calendar (FOMC, unlocks, ETF dates)</span>
+      <span class="feat">Learn the Basics row</span>
+      <span class="feat">Bold gradient email banner</span>
+    </div>
+  </a>
 
   <h2 class="group">Earlier</h2>
-  <a class="flagship" href="./flagship.html">
-    <h3>Flagship <span class="rec">Original recommendation</span></h3>
-    <span>Blue/white professional baseline these five brand directions were built from.</span>
-  </a>
+  <a class="card" href="./flagship.html"><h3>Flagship</h3><span class="desc">Blue/white professional baseline these five were built from.</span></a>
 </div>
 </body>
 </html>
