@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Desk — Times of Crypto Era Redesign</title>
+</head>
+<body>
+<style>
+  :root {
+    --left-bg: #0e1210;
+    --left-line: #1e2521;
+    --left-text: #eef1ee;
+    --left-dim: #7c8880;
+    --paper: #fbf9f4;
+    --ink: #1c1d1a;
+    --muted: #6f6e64;
+    --rule: #e4e0d4;
+    --red: #d64545;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Karla', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  .display { font-family: 'Zilla Slab', Georgia, serif; text-wrap: balance; }
+  .mono { font-family: 'Spline Sans Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+
+  .shell { display: grid; grid-template-columns: 320px 1fr; min-height: 100vh; }
+
+  /* LEFT — persistent market desk */
+  .desk {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    background: var(--left-bg);
+    color: var(--left-text);
+    padding: 30px 26px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--left-line);
+  }
+  .desk .wordmark { font-family: 'Zilla Slab', serif; font-weight: 600; font-size: 19px; margin-bottom: 30px; }
+  .desk .wordmark span { color: var(--red); }
+  .desk-label { font-family: 'Spline Sans Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--left-dim); margin-bottom: 14px; }
+
+  .coin-block { border-top: 1px solid var(--left-line); padding: 16px 0; }
+  .coin-block:first-of-type { border-top: none; }
+  .coin-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .coin-row .sym { font-weight: 700; font-size: 14px; }
+  .coin-row .px { font-family: 'Spline Sans Mono', monospace; font-size: 13px; }
+  .coin-row .delta { font-family: 'Spline Sans Mono', monospace; font-size: 11.5px; }
+  .up { color: #6fcf97; } .down { color: var(--red); }
+  .spark { width: 100%; height: 32px; display: block; }
+
+  .nav-list { margin-top: auto; padding-top: 24px; border-top: 1px solid var(--left-line); }
+  .nav-list a { display: block; font-size: 13px; color: var(--left-dim); padding: 7px 0; }
+  .nav-list a:hover { color: var(--left-text); }
+
+  .most-read { margin-top: 22px; }
+  .mr-row { display: flex; gap: 10px; padding: 10px 0; border-top: 1px solid var(--left-line); }
+  .mr-row .n { font-family: 'Spline Sans Mono', monospace; font-size: 11px; color: var(--red); width: 14px; }
+  .mr-row .t { font-size: 12px; line-height: 1.35; color: var(--left-text); }
+
+  /* RIGHT — editorial well, varied rhythm */
+  .well { padding: 46px 56px 90px; max-width: 900px; }
+
+  .kicker {
+    font-family: 'Spline Sans Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 14px;
+  }
+
+  .lead-block { margin-bottom: 50px; }
+  .lead-canvas {
+    height: 260px;
+    border-radius: 4px;
+    margin-bottom: 22px;
+    background: linear-gradient(120deg, #cfd6c9, #f2ede1 60%, #e7ddc9);
+  }
+  .lead-block h1 { font-size: 42px; line-height: 1.06; font-weight: 600; margin: 0 0 16px; }
+  .lead-block p.dek { font-size: 16.5px; line-height: 1.6; color: var(--muted); max-width: 58ch; margin: 0 0 16px; }
+  .byline { font-family: 'Spline Sans Mono', monospace; font-size: 11.5px; color: var(--muted); }
+
+  .rule { border: none; border-top: 1px solid var(--rule); margin: 44px 0; }
+
+  .compact-row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 20px;
+    padding: 20px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .compact-row .cat { font-family: 'Spline Sans Mono', monospace; font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--red); }
+  .compact-row h3 { font-family: 'Zilla Slab', serif; font-weight: 600; font-size: 19px; margin: 0 0 6px; line-height: 1.28; }
+  .compact-row p { color: var(--muted); font-size: 13.5px; line-height: 1.5; margin: 0; }
+
+  .pull { margin: 44px 0; padding: 30px 0; border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+  .pull .kicker { color: var(--muted); }
+  .pull blockquote { font-family: 'Zilla Slab', serif; font-style: italic; font-size: 27px; line-height: 1.32; margin: 0 0 14px; }
+  .pull cite { font-family: 'Spline Sans Mono', monospace; font-size: 12px; font-style: normal; color: var(--muted); }
+
+  .medium-block { display: grid; grid-template-columns: 1fr 1.4fr; gap: 30px; padding: 26px 0; border-top: 1px solid var(--rule); align-items: center; }
+  .medium-block .m-canvas { height: 150px; border-radius: 4px; background: linear-gradient(135deg, #e7ddc9, #cfd6c9); }
+  .medium-block h3 { font-family: 'Zilla Slab', serif; font-weight: 600; font-size: 24px; margin: 0 0 10px; line-height: 1.2; }
+  .medium-block p { color: var(--muted); font-size: 14px; line-height: 1.55; margin: 0; }
+
+  @media (max-width: 900px) {
+    .shell { grid-template-columns: 1fr; }
+    .desk { position: relative; height: auto; }
+    .well { padding: 34px 24px 70px; }
+    .medium-block { grid-template-columns: 1fr; }
+  }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Karla:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500;600&display=swap">
+
+<div class="shell">
+  <aside class="desk">
+    <div class="wordmark">Times of Crypto <span>Era</span></div>
+
+    <div class="desk-label">Market Desk</div>
+    <div class="coin-block">
+      <div class="coin-row"><span class="sym">BTC</span><span class="px mono">$71,240</span></div>
+      <canvas class="spark" data-seed="1" data-color="#6fcf97"></canvas>
+      <div class="coin-row"><span></span><span class="delta up mono">▲ 2.14% · 24h</span></div>
+    </div>
+    <div class="coin-block">
+      <div class="coin-row"><span class="sym">ETH</span><span class="px mono">$3,412</span></div>
+      <canvas class="spark" data-seed="2" data-color="#d64545"></canvas>
+      <div class="coin-row"><span></span><span class="delta down mono">▼ 0.86% · 24h</span></div>
+    </div>
+    <div class="coin-block">
+      <div class="coin-row"><span class="sym">SOL</span><span class="px mono">$168.90</span></div>
+      <canvas class="spark" data-seed="3" data-color="#6fcf97"></canvas>
+      <div class="coin-row"><span></span><span class="delta up mono">▲ 4.32% · 24h</span></div>
+    </div>
+
+    <div class="most-read">
+      <div class="desk-label">Most Read</div>
+      <div class="mr-row"><span class="n">1</span><span class="t">How Solana Achieves High Throughput Where Other Chains Struggle</span></div>
+      <div class="mr-row"><span class="n">2</span><span class="t">What Layer-2 Rollups Actually Do for Ethereum</span></div>
+      <div class="mr-row"><span class="n">3</span><span class="t">What the Ethereum Merge Actually Changed</span></div>
+    </div>
+
+    <nav class="nav-list">
+      <a href="#">Bitcoin</a>
+      <a href="#">Ethereum</a>
+      <a href="#">Solana</a>
+      <a href="#">Search</a>
+    </nav>
+  </aside>
+
+  <main class="well">
+    <div class="lead-block">
+      <div class="kicker">Solana · Lead Story</div>
+      <div class="lead-canvas"></div>
+      <h1 class="display">Why Solana Has Had Network Outages, and What&rsquo;s Changed</h1>
+      <p class="dek">Solana went fully offline multiple times in its early years. Here is what actually caused those outages and the fixes that followed.</p>
+      <div class="byline">MARTIN · AUG 26, 2026 · 6 MIN READ</div>
+    </div>
+
+    <div class="compact-row">
+      <span class="cat">Bitcoin</span>
+      <div>
+        <h3 class="display">What Is Bitcoin Halving, and Why It Matters for Supply</h3>
+        <p>The scheduled cut to new BTC issuance, explained without the hype.</p>
+      </div>
+    </div>
+    <div class="compact-row">
+      <span class="cat">DeFi</span>
+      <div>
+        <h3 class="display">What Is DeFi? A Plain Explanation of Decentralized Finance</h3>
+        <p>Lending, trading, and yield without a bank in the middle.</p>
+      </div>
+    </div>
+
+    <div class="pull">
+      <div class="kicker">From the Ethereum desk</div>
+      <blockquote>&ldquo;Rollups bundle transactions off-chain and settle back to Ethereum &mdash; the mechanism, not the marketing.&rdquo;</blockquote>
+      <cite>What Layer-2 Rollups Actually Do for Ethereum</cite>
+    </div>
+
+    <div class="medium-block">
+      <div class="m-canvas"></div>
+      <div>
+        <span class="kicker" style="margin-bottom:8px;">Ethereum</span>
+        <h3 class="display">What the Ethereum Merge Actually Changed</h3>
+        <p>Proof of stake, issuance, and what shifted under the hood versus what stayed the same.</p>
+      </div>
+    </div>
+
+    <div class="compact-row">
+      <span class="cat">Regulation</span>
+      <div>
+        <h3 class="display">How Stablecoins Actually Keep Their Peg</h3>
+        <p>Reserves, redemption, and the mechanisms that hold a dollar-pegged token to a dollar.</p>
+      </div>
+    </div>
+
+    <hr class="rule">
+    <div class="byline">© 2026 TIMES OF CRYPTO ERA — DESIGN DIRECTION: DESK</div>
+  </main>
+</div>
+
+<script>
+  (function () {
+    document.querySelectorAll('.spark').forEach(function (c) {
+      var ctx = c.getContext('2d');
+      var w = c.clientWidth || 260, h = 32;
+      c.width = w; c.height = h;
+      var n = 24, pts = [], y = h * 0.6;
+      var seed = parseInt(c.dataset.seed, 10);
+      for (var i = 0; i < n; i++) {
+        y += (Math.sin(i * seed) + (Math.random() - 0.5)) * 3.2;
+        y = Math.max(4, Math.min(h - 4, y));
+        pts.push(y);
+      }
+      ctx.beginPath();
+      for (var i = 0; i < n; i++) { var x = (i / (n - 1)) * w; if (i === 0) ctx.moveTo(x, pts[i]); else ctx.lineTo(x, pts[i]); }
+      ctx.strokeStyle = c.dataset.color;
+      ctx.lineWidth = 1.6;
+      ctx.stroke();
+    });
+  })();
+</script>
+</body>
+</html>

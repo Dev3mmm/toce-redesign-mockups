@@ -11,10 +11,12 @@
   p { color:#9aa1ac; line-height:1.5; }
   h2.group { font-size:13px; text-transform:uppercase; letter-spacing:0.08em; color:#6b6f78; margin-top:36px; margin-bottom:4px; }
   .card { display:block; border:1px solid #2a2e37; border-radius:10px; padding:22px 24px; margin-top:14px; text-decoration:none; color:inherit; }
-  .card:hover { border-color:#6b4eff; }
+  .card:hover { border-color:#ff4d3d; }
   .card h2 { margin:0 0 6px; font-size:19px; }
   .card span { color:#9aa1ac; font-size:14px; }
-  .new-badge { display:inline-block; background:#6c8cff; color:#0b0d14; font-size:10px; font-weight:700; letter-spacing:0.05em; padding:2px 7px; border-radius:5px; margin-left:8px; vertical-align:middle; }
+  .badge { display:inline-block; font-size:10px; font-weight:700; letter-spacing:0.05em; padding:2px 7px; border-radius:5px; margin-left:8px; vertical-align:middle; }
+  .badge.structural { background:#ff4d3d; color:#fff; }
+  .badge.new { background:#6c8cff; color:#0b0d14; }
 </style>
 </head>
 <body>
@@ -22,27 +24,37 @@
   <h1>Times of Crypto Era — Redesign Directions</h1>
   <p>Homepage design directions, built with real site content, for review.</p>
 
-  <h2 class="group">2026-forward</h2>
-  <a class="card" href="./bento.html">
-    <h2>Bento <span class="new-badge">NEW</span></h2>
-    <span>Dark glass bento-grid dashboard. Indigo glow, live pulse indicators, tile-based layout.</span>
+  <h2 class="group">Structurally different — not just reskins</h2>
+  <a class="card" href="./console.html">
+    <h2>Console <span class="badge structural">STRUCTURE</span></h2>
+    <span>No cards, no grid, no hero. One ranked feed where type size encodes attention — biggest headline is most-read, tapering down. Monochrome + red only.</span>
   </a>
-  <a class="card" href="./aperture.html">
-    <h2>Aperture <span class="new-badge">NEW</span></h2>
-    <span>Light gradient-mesh glassmorphism. Coral/blue mesh, italic serif, floating glass cards.</span>
+  <a class="card" href="./desk.html">
+    <h2>Desk <span class="badge structural">STRUCTURE</span></h2>
+    <span>Persistent split-screen — a fixed live market panel stays on screen while an editorial "well" of varied-size story blocks scrolls independently beside it.</span>
   </a>
 
-  <h2 class="group">Editorial classics</h2>
+  <h2 class="group">2026-forward (same layout, different skin)</h2>
+  <a class="card" href="./bento.html">
+    <h2>Bento <span class="badge new">skin</span></h2>
+    <span>Dark glass bento-grid dashboard. Indigo glow, live pulse indicators.</span>
+  </a>
+  <a class="card" href="./aperture.html">
+    <h2>Aperture <span class="badge new">skin</span></h2>
+    <span>Light gradient-mesh glassmorphism. Coral/blue mesh, floating glass cards.</span>
+  </a>
+
+  <h2 class="group">Editorial classics (same layout, different skin)</h2>
   <a class="card" href="./ledger.html">
-    <h2>Ledger</h2>
+    <h2>Ledger <span class="badge new">skin</span></h2>
     <span>Dark trading-desk. Amber accent, serif headlines, mono data ticker.</span>
   </a>
   <a class="card" href="./broadsheet.html">
-    <h2>Broadsheet</h2>
+    <h2>Broadsheet <span class="badge new">skin</span></h2>
     <span>Light, print-inspired newspaper layout. Cobalt accent, editorial serif.</span>
   </a>
   <a class="card" href="./signal.html">
-    <h2>Signal</h2>
+    <h2>Signal <span class="badge new">skin</span></h2>
     <span>Bold, color-blocked, poster-graphic energy. Violet accent, sharp corners.</span>
   </a>
 </div>
