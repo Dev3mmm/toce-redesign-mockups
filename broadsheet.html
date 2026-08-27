@@ -259,6 +259,39 @@
     background-size: cover !important;
     background-position: center !important;
   }
+
+  /* Scrolling top-10 coin price ticker */
+  .ticker-bar {
+    background: var(--ink);
+    border-bottom: 1px solid var(--ink);
+    overflow: hidden;
+  }
+  .ticker-track {
+    display: flex;
+    gap: 36px;
+    padding: 9px 0;
+    white-space: nowrap;
+    animation: ticker-scroll 38s linear infinite;
+    width: max-content;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-track { animation: none; }
+  }
+  @keyframes ticker-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .ticker-item {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: #cfd3c8;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .ticker-item b { color: #fff; font-weight: 600; }
+  .ticker-item .up { color: #4fae6e; }
+  .ticker-item .down { color: #e2604c; }
 </style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -268,6 +301,36 @@
   <div class="dateline">
     <span>Thursday, August 27, 2026 · Digital Edition</span>
     <span>No. 214</span>
+  </div>
+</div>
+
+
+<div class="ticker-bar">
+  <div class="ticker-track">
+    <div style="display:flex; gap:36px;">
+        <span class="ticker-item">BTC <b>$71,240</b> <span class="up">+2.14%</span></span>
+        <span class="ticker-item">ETH <b>$3,412</b> <span class="down">-0.86%</span></span>
+        <span class="ticker-item">SOL <b>$168.90</b> <span class="up">+4.32%</span></span>
+        <span class="ticker-item">BNB <b>$612.40</b> <span class="up">+1.05%</span></span>
+        <span class="ticker-item">XRP <b>$0.612</b> <span class="down">-1.42%</span></span>
+        <span class="ticker-item">DOGE <b>$0.184</b> <span class="up">+6.71%</span></span>
+        <span class="ticker-item">ADA <b>$0.441</b> <span class="up">+0.12%</span></span>
+        <span class="ticker-item">AVAX <b>$38.20</b> <span class="up">+1.88%</span></span>
+        <span class="ticker-item">LINK <b>$14.60</b> <span class="up">+3.02%</span></span>
+        <span class="ticker-item">DOT <b>$6.14</b> <span class="down">-1.11%</span></span>
+    </div>
+    <div style="display:flex; gap:36px;" aria-hidden="true">
+        <span class="ticker-item">BTC <b>$71,240</b> <span class="up">+2.14%</span></span>
+        <span class="ticker-item">ETH <b>$3,412</b> <span class="down">-0.86%</span></span>
+        <span class="ticker-item">SOL <b>$168.90</b> <span class="up">+4.32%</span></span>
+        <span class="ticker-item">BNB <b>$612.40</b> <span class="up">+1.05%</span></span>
+        <span class="ticker-item">XRP <b>$0.612</b> <span class="down">-1.42%</span></span>
+        <span class="ticker-item">DOGE <b>$0.184</b> <span class="up">+6.71%</span></span>
+        <span class="ticker-item">ADA <b>$0.441</b> <span class="up">+0.12%</span></span>
+        <span class="ticker-item">AVAX <b>$38.20</b> <span class="up">+1.88%</span></span>
+        <span class="ticker-item">LINK <b>$14.60</b> <span class="up">+3.02%</span></span>
+        <span class="ticker-item">DOT <b>$6.14</b> <span class="down">-1.11%</span></span>
+    </div>
   </div>
 </div>
 
