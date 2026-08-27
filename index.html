@@ -10,59 +10,61 @@
   h1 { font-size:28px; margin-bottom:8px; }
   p.lead { color:#9aa1ac; line-height:1.5; }
   h2.group { font-size:13px; text-transform:uppercase; letter-spacing:0.08em; color:#6b6f78; margin-top:34px; margin-bottom:12px; }
+  .flagship { display:block; border:2px solid #1d5fd6; background:#1d5fd614; border-radius:12px; padding:22px; margin-bottom:14px; text-decoration:none; color:inherit; }
+  .flagship h3 { margin:0 0 6px; font-size:18px; }
+  .flagship .desc { color:#9aa1ac; font-size:13.5px; display:block; margin-bottom:10px; }
+  .rec { display:inline-block; background:#1d5fd6; color:#fff; font-size:10px; font-weight:700; letter-spacing:0.05em; padding:3px 8px; border-radius:5px; margin-left:8px; vertical-align:middle; }
   .card { display:block; border:1px solid #2a2e37; border-radius:12px; padding:22px 24px; margin-bottom:14px; text-decoration:none; color:inherit; }
-  .card:hover { border-color:#0a7ea4; }
+  .card:hover { border-color:#1d5fd6; }
   .swatch { display:inline-flex; gap:4px; margin-bottom:10px; }
   .swatch i { width:16px; height:16px; border-radius:4px; display:inline-block; }
   .card h3 { margin:0 0 4px; font-size:18px; }
-  .card .anchor { font-size:11.5px; color:#0a7ea4; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:8px; display:block; }
-  .card .desc { color:#9aa1ac; font-size:13.5px; line-height:1.5; display:block; }
+  .card .desc { color:#9aa1ac; font-size:13.5px; line-height:1.5; display:block; margin-bottom:10px; }
+  .features { display:flex; flex-wrap:wrap; gap:6px; }
+  .feat { font-size:11px; background:#1b1d24; border:1px solid #2a2e37; color:#c9cdd6; padding:3px 9px; border-radius:999px; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>Times of Crypto Era — Redesign Directions</h1>
-  <p class="lead">Each of these leads with a different anchor concept — not a hero story with a sidebar recolored, an actually different front door.</p>
+  <p class="lead">Simple, easy-to-navigate homepages — classic top-to-bottom flow, everything scannable. All three carry the same feature set (date, Fear &amp; Greed, heatmap, movers, ad slot, guides, email signup, latest grid); the difference is genuine visual identity, not structure.</p>
 
-  <h2 class="group">New: different front-door concepts</h2>
+  <h2 class="group">Three directions — simple layout, distinct identity</h2>
 
-  <a class="card" href="./atlas.html">
-    <div class="swatch"><i style="background:#14181c"></i><i style="background:#0f766e"></i><i style="background:#ffffff;border:1px solid #333"></i></div>
-    <h3>Atlas</h3>
-    <span class="anchor">Anchor: live market heatmap</span>
-    <span class="desc">Opens on a color-coded heatmap of the top 24 coins by cap — data visualization as the front door, not a story. Plus a daily crypto-term glossary card.</span>
+  <a class="card" href="./clarity.html">
+    <div class="swatch"><i style="background:#111827"></i><i style="background:#1d5fd6"></i><i style="background:#ffffff;border:1px solid #333"></i></div>
+    <h3>Clarity</h3>
+    <span class="desc">Light, clean, blue-accent professional. The most conventional and easiest to scan of the three.</span>
   </a>
 
-  <a class="card" href="./roundtable.html">
-    <div class="swatch"><i style="background:#10201d"></i><i style="background:#ff7a59"></i><i style="background:#eef2f1"></i></div>
-    <h3>Roundtable</h3>
-    <span class="anchor">Anchor: people &amp; media</span>
-    <span class="desc">Watch &amp; Listen row (podcast/video), an author-spotlight strip naming the actual reporters, and a live reader poll (Bullish/Bearish). Personality-led, not algorithm-led.</span>
+  <a class="card" href="./vantage.html">
+    <div class="swatch"><i style="background:#0c1116"></i><i style="background:#2fb8b0"></i><i style="background:#e8a33d"></i></div>
+    <h3>Vantage</h3>
+    <span class="desc">Dark, teal + amber accents, monospace data throughout. Pro-desk feel, still simple top-to-bottom.</span>
   </a>
 
-  <a class="card" href="./ledger-sheet.html">
-    <div class="swatch"><i style="background:#0e1113"></i><i style="background:#0a7ea4"></i><i style="background:#ffffff;border:1px solid #333"></i></div>
-    <h3>Ledger Sheet</h3>
-    <span class="anchor">Anchor: comparison table + live blog</span>
-    <span class="desc">Opens on a BTC/ETH/SOL spreadsheet-style compare table, then a "Today in Crypto" chronological live-blog timeline instead of a trending list. Data-desk feel.</span>
+  <a class="card" href="./almanac.html">
+    <div class="swatch"><i style="background:#2a2118"></i><i style="background:#a8611f"></i><i style="background:#fbf6ea;border:1px solid #333"></i></div>
+    <h3>Almanac</h3>
+    <span class="desc">Warm cream paper, serif headlines, classic newspaper dateline and masthead. Print-inspired trust.</span>
   </a>
 
-  <a class="card" href="./compass.html">
-    <div class="swatch"><i style="background:#fdfbf7;border:1px solid #333"></i><i style="background:#f0a825"></i><i style="background:#6c8ff0"></i></div>
-    <h3>Compass</h3>
-    <span class="anchor">Anchor: browse by topic, not by "latest"</span>
-    <span class="desc">No single lead story up top — big colored topic tiles (Bitcoin/Ethereum/Solana/DeFi/Regulation) are the front door. Explore-first navigation for readers who came for a topic, not a headline.</span>
-  </a>
+  <h2 class="group">What every one of the three includes</h2>
+  <div class="features" style="margin-bottom:30px;">
+    <span class="feat">Date in header</span>
+    <span class="feat">Fear &amp; Greed Index</span>
+    <span class="feat">Market Heatmap</span>
+    <span class="feat">Coins That Moved (gainers/losers)</span>
+    <span class="feat">Center ad slot</span>
+    <span class="feat">Guides &amp; Explainers row</span>
+    <span class="feat">Email signup band</span>
+    <span class="feat">Latest News grid</span>
+  </div>
 
-  <h2 class="group">Earlier — five brand identities, same skeleton</h2>
-  <a class="card" href="./meridian.html"><h3>Meridian</h3><span class="desc">Financial-authority desk with Fear &amp; Greed gauge.</span></a>
-  <a class="card" href="./volt.html"><h3>Volt</h3><span class="desc">Consumer fintech, sparkline coin cards.</span></a>
-  <a class="card" href="./obsidian.html"><h3>Obsidian</h3><span class="desc">Pro-trader dark terminal, gainers/losers table.</span></a>
-  <a class="card" href="./ember.html"><h3>Ember</h3><span class="desc">Warm editorial masthead, Editor's Picks.</span></a>
-  <a class="card" href="./pulse.html"><h3>Pulse</h3><span class="desc">Social-native, Trending on X, Crypto Calendar.</span></a>
-
-  <h2 class="group">Earliest baseline</h2>
-  <a class="card" href="./flagship.html"><h3>Flagship</h3><span class="desc">The original professional blue/white baseline.</span></a>
+  <h2 class="group">Earlier rounds</h2>
+  <a class="flagship" href="./flagship.html"><h3>Flagship <span class="rec">Original baseline</span></h3><span class="desc">The professional blue/white starting point.</span></a>
+  <a class="card" href="./meridian.html"><h3>Meridian, Volt, Obsidian, Ember, Pulse</h3><span class="desc">Five brand identities with individually different modules.</span></a>
+  <a class="card" href="./atlas.html"><h3>Atlas, Roundtable, Ledger Sheet, Compass</h3><span class="desc">Four experimental front-door concepts (heatmap-led, media-led, table-led, browse-led).</span></a>
 </div>
 </body>
 </html>
