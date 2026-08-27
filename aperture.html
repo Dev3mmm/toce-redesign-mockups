@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aperture — Times of Crypto Era Redesign</title>
+</head>
+<body>
+<style>
+  :root {
+    --bg: #faf9f6;
+    --ink: #16161a;
+    --muted: #6b6d76;
+    --glass: rgba(255,255,255,0.55);
+    --glass-border: rgba(22,22,26,0.08);
+    --coral: #ff6b4a;
+    --coral-soft: rgba(255,107,74,0.12);
+    --blue: #2f6bff;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Hanken Grotesk', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .display { font-family: 'Instrument Serif', Georgia, serif; text-wrap: balance; }
+  .mono { font-family: 'Fragment Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+  /* Mesh backdrop for hero */
+  .mesh {
+    position: relative;
+    overflow: hidden;
+  }
+  .mesh::before {
+    content: '';
+    position: absolute; inset: -20% -10%;
+    background:
+      radial-gradient(38% 45% at 18% 22%, rgba(255,107,74,0.30), transparent 70%),
+      radial-gradient(42% 50% at 82% 18%, rgba(47,107,255,0.22), transparent 70%),
+      radial-gradient(50% 60% at 55% 85%, rgba(255,107,74,0.12), transparent 70%);
+    filter: blur(40px);
+    z-index: 0;
+  }
+  .mesh > * { position: relative; z-index: 1; }
+
+  /* Nav */
+  .nav-shell { padding: 24px 0 0; }
+  .nav-glass {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(16px);
+    border-radius: 18px;
+    padding: 14px 22px;
+  }
+  .wordmark { font-family: 'Instrument Serif', serif; font-size: 21px; font-style: italic; }
+  .wordmark b { font-style: normal; font-weight: 400; }
+  nav.links { display: flex; gap: 28px; font-size: 13.5px; color: var(--muted); font-weight: 500; }
+  nav.links a:hover { color: var(--ink); }
+  .btn { background: var(--ink); color: #fff; font-size: 13px; font-weight: 600; padding: 10px 20px; border-radius: 999px; }
+
+  /* Hero */
+  .hero { padding: 60px 0 70px; }
+  .hero-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    border-radius: 28px;
+    padding: 54px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 50px;
+  }
+  .chip {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: 'Fragment Mono', monospace;
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    background: var(--coral-soft);
+    color: var(--coral);
+    padding: 7px 13px;
+    border-radius: 999px;
+    margin-bottom: 22px;
+  }
+  .chip::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--coral); }
+  .hero-headline { font-size: 50px; line-height: 1.02; font-weight: 400; font-style: italic; margin: 0 0 20px; }
+  .hero-dek { font-size: 16.5px; line-height: 1.6; color: var(--muted); max-width: 48ch; margin: 0 0 24px; }
+  .byline { font-size: 12.5px; color: var(--muted); display: flex; gap: 16px; }
+
+  .rail-title { font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
+  .rank-row { display: flex; gap: 14px; padding: 15px 0; border-top: 1px solid var(--glass-border); }
+  .rank-row:first-of-type { border-top: none; }
+  .rank-row .n { font-family: 'Instrument Serif', serif; font-size: 26px; font-style: italic; color: var(--coral); width: 30px; }
+  .rank-row .cat { font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--blue); display: block; margin-bottom: 5px; }
+  .rank-row .t { font-size: 14px; font-weight: 600; line-height: 1.32; }
+
+  /* Latest — scroll chip row + masonry-ish cards */
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; padding: 10px 0 22px; }
+  .section-title { font-family: 'Instrument Serif', serif; font-size: 30px; font-style: italic; }
+  .view-all { font-size: 13px; font-weight: 600; color: var(--blue); }
+
+  .card-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; padding-bottom: 70px; }
+  .glass-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(14px);
+    border-radius: 22px;
+    padding: 26px;
+    box-shadow: 0 18px 40px -24px rgba(22,22,26,0.18);
+  }
+  .glass-card:nth-child(2) { margin-top: 26px; }
+  .glass-card .cat {
+    display: inline-block;
+    font-family: 'Fragment Mono', monospace;
+    font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--blue);
+    background: rgba(47,107,255,0.1);
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  .glass-card h3 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 22px; line-height: 1.22; margin: 0 0 10px; }
+  .glass-card p { color: var(--muted); font-size: 13.5px; line-height: 1.55; margin: 0 0 14px; }
+  .glass-card .byline { font-size: 11.5px; }
+
+  footer.site { padding: 28px 0 42px; display: flex; justify-content: space-between; font-size: 12.5px; color: var(--muted); }
+  footer.site .mono { color: var(--coral); }
+
+  @media (max-width: 900px) {
+    .hero-card { grid-template-columns: 1fr; padding: 34px; }
+    .card-row { grid-template-columns: 1fr; }
+    .glass-card:nth-child(2) { margin-top: 0; }
+  }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700&family=Fragment+Mono&display=swap">
+
+<div class="mesh">
+  <div class="wrap nav-shell">
+    <div class="nav-glass">
+      <div class="wordmark">Times of Crypto <b>Era</b></div>
+      <nav class="links">
+        <a href="#">Latest</a>
+        <a href="#">Bitcoin</a>
+        <a href="#">Ethereum</a>
+        <a href="#">Solana</a>
+        <a href="#">Search</a>
+      </nav>
+      <a class="btn" href="#">Subscribe</a>
+    </div>
+  </div>
+
+  <div class="wrap hero">
+    <div class="hero-card">
+      <div>
+        <span class="chip">Solana · Lead Story</span>
+        <h1 class="hero-headline">Why Solana Has Had Network Outages, and What&rsquo;s Changed</h1>
+        <p class="hero-dek">Solana went fully offline multiple times in its early years. Here is what actually caused those outages and the fixes that followed.</p>
+        <div class="byline"><span>Martin</span><span>Aug 26, 2026</span><span>6 min read</span></div>
+      </div>
+      <div>
+        <div class="rail-title">Trending Now</div>
+        <div class="rank-row">
+          <span class="n">1</span>
+          <div><span class="cat">Solana</span><div class="t">How Solana Achieves High Throughput Where Other Chains Struggle</div></div>
+        </div>
+        <div class="rank-row">
+          <span class="n">2</span>
+          <div><span class="cat">Ethereum</span><div class="t">What Layer-2 Rollups Actually Do for Ethereum</div></div>
+        </div>
+        <div class="rank-row">
+          <span class="n">3</span>
+          <div><span class="cat">Ethereum</span><div class="t">What the Ethereum Merge Actually Changed</div></div>
+        </div>
+        <div class="rank-row">
+          <span class="n">4</span>
+          <div><span class="cat">Regulation</span><div class="t">How Stablecoins Actually Keep Their Peg</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="section-head">
+    <div class="section-title">Latest News</div>
+    <a class="view-all" href="#">View all →</a>
+  </div>
+  <div class="card-row">
+    <div class="glass-card">
+      <span class="cat">Bitcoin</span>
+      <h3>What Is Bitcoin Halving, and Why It Matters for Supply</h3>
+      <p>The scheduled cut to new BTC issuance, explained without the hype.</p>
+      <div class="byline">Martin · Aug 26</div>
+    </div>
+    <div class="glass-card">
+      <span class="cat">DeFi</span>
+      <h3>What Is DeFi? A Plain Explanation of Decentralized Finance</h3>
+      <p>Lending, trading, and yield without a bank in the middle.</p>
+      <div class="byline">Martin · Aug 26</div>
+    </div>
+    <div class="glass-card">
+      <span class="cat">Regulation</span>
+      <h3>How Stablecoins Actually Keep Their Peg</h3>
+      <p>Reserves, redemption, and the mechanisms behind the peg.</p>
+      <div class="byline">Martin · Aug 26</div>
+    </div>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
+    <span>© 2026 Times of Crypto Era</span>
+    <span class="mono">DESIGN DIRECTION — APERTURE</span>
+  </div>
+</footer>
+</body>
+</html>
